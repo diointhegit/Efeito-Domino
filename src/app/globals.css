@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: #e5e7f5;
+}
+
+[data-theme="dark"] body {
+  :root {
+    --foreground-rgb: #fff;
+  }
+}
+
+/* a:after {
+  display: block;
+  content: "";
+  border-bottom: solid 3px black;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms ease-in-out;
+}
+a:hover:after {
+  transform: scaleX(1);
+  color: white;
+} */
