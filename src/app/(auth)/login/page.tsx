@@ -1,11 +1,11 @@
-import { supabase } from "@/supabase/config";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { LoginForm } from "./loginform";
 
-export default function Page() {
+export default async function Page() {
   async function handleLogin(fd: FormData) {
     "use server";
 
@@ -40,36 +40,11 @@ export default function Page() {
   }
 
   return (
-    <div className=" w-1/3 bg-light-bg py-10 rounded-2xl">
-      <h1 className="text-4xl text-center ">Login</h1>
-      <form action={handleLogin} className="grid space-y-5 text-left px-10">
-        <div className="grid ">
-          <label htmlFor="" className="text-xl">
-            Email
-          </label>
-          <input
-            type="text"
-            name="email"
-            className="outline outline-1 outline-black text-lg px-1"
-          />
-        </div>
-        <div className="grid ">
-          <label htmlFor="" className="text-xl">
-            Senha
-          </label>
-          <input
-            type="password"
-            name="password"
-            className="outline outline-1 outline-black text-lg px-1"
-          />
-        </div>
-        <button className=" bg-dark-bg hover:bg-light-bg hover:outline text-light-text grid place-items-center hover:text-dark-text outline-dark-bg outline-1 px-5 text-center h-12 transition-all ease-in-out">
-          Login
-        </button>
-        <p className="">
-          Não tem uma conta? <Link href="/register"> Cadastre-se </Link>
-        </p>
-      </form>
+    <div className="w-[350px] shadow-2xl bg-primary border-dark-bg border-2 py-10 rounded-md text-light-text">
+      <h1 className="text-4xl text-center mb-5 text-light-text font-bold">
+        Login
+      </h1>
+      <LoginForm />
     </div>
   );
 }

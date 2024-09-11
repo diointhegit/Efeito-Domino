@@ -11,13 +11,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#4C6085",
+        primary: "#003BA8",
         secondary: "#A63446",
         accent: "#A3B9C9",
         "dark-text": "#0D0E21",
         "dark-bg": "#0A0C1B",
         "light-text": "#DFE0F3",
-        "light-bg": "#E5E7F5",
+        "light-bg": "#eef4fc",
         bg: "var(--foreground-rgb)",
       },
       keyframes: {

@@ -52,3 +52,7 @@ export function Nav() {
     </nav>
   );
 }
+
+export function LandingPageNav() {
+  return <nav></nav>;
+}
