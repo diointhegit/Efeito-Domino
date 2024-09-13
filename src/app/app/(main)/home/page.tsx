@@ -19,13 +19,13 @@ export default async function Page() {
   const user = await getUser(uid);
   return (
     <div className="">
-      <div className="px-12 py-5 bg-primary">
+      <div className="px-12 py-5 bg-primary text-light-text">
         <MainHeader name={user.name} balance={user.balance} />
       </div>
 
       <div>
         <h3 className="text-3xl pb-5">Suas metas esse mês:</h3>
-        <div className="h-32 w-[320px]  bg-primary grid  px-5 py-2 rounded-xl">
+        <div className="h-32 w-[320px]  bg-primary grid  px-5 py-2 rounded-xl text-light-text">
           <p className="text-xl"> Assinaturas </p>
           <p className="text-3xl font-bold"> R$ 25,00 </p>
         </div>

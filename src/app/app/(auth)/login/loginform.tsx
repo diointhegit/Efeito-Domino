@@ -31,7 +31,7 @@ export const LoginForm = () => {
     });
     if (data) {
       console.log(data);
-      router.push("/home");
+      router.push("/app/home");
     }
     if (error) {
       console.log(error);

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Lexend_Deca } from "next/font/google";
 import "./globals.css";
 import { LandingPageNav } from "@/components/nav";
+import Image from "next/image";
+import Link from "next/link";
 
 const inter = Lexend_Deca({ subsets: ["latin"] });
 
@@ -18,8 +20,7 @@ export default function RootLayout({
   return (
     <html lang="PT-BR">
       <body className={inter.className}>
-        <LandingPageNav />
-        {children}
+        <div className="overflow-x-hidden">{children}</div>
       </body>
     </html>
   );

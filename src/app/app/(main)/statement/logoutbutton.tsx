@@ -16,5 +16,10 @@ export const SignOutButton = () => {
     router.push("/login");
   };
 
-  return <p onClick={unsign}> Deslogar </p>;
+  return (
+    <p className="cursor-pointer" onClick={unsign}>
+      {" "}
+      Deslogar{" "}
+    </p>
+  );
 };
