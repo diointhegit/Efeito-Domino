@@ -19,3 +19,13 @@ Jovens, de 16 até 28 anos que estão no começo de suas vidas financeiras
 ##### Contexto
 
 Economia no Brasil está em baixa e portanto há muitas situações de jovens com quase 30 anos morando com os pais, conseguem ir bem financeiramente mas a questão da independência está complicada e isso está ligado direatamente com a superafaturação de bens e imóveis, mas administrar de melhor maneira nosso dinheiro é uma maneira de tentar contornar isso.
+
+
+### O que nosso projeto apresentará
+- Cadastro de Saída/Entrada
+- Cadastro de Metas
+- Cadastro de Controle
+- Separação de gastos por categoria (opcional)
+- Educacional
+    - Simulador de investimentos de Renda Fixa (CDB, LCI e LCA, tesouro selic, poupança, etc...)
+    - Informações sobre educação financeira
