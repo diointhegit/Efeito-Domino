@@ -1,3 +1,37 @@
-export default function Page() {
-  return <div> oi </div>;
+import { dateToBRStringDate } from "@/lib/timefns";
+import { transactionType } from "@/lib/types";
+import { createClient } from "@/utils/supabase/server";
+import { Extrato } from "./extrato";
+import { BiPlus } from "react-icons/bi";
+import { AddTransaction } from "@/components/add-transaction";
+
+export default async function Page() {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.getUser();
+  let uid = data.user?.id;
+  const getStatement = async (id: string | undefined) => {
+    const { data, error } = await supabase
+      .from("statement")
+      .select()
+      .eq("userid", id);
+    if (error) {
+      return error;
+    }
+    return data;
+  };
+
+  const statement = (await getStatement(uid)) as transactionType[];
+  return (
+    <div className="px-5 flex flex-col items-center text-left md:block md:px-20">
+      <div className="text-start md:w-[50rem]">
+        <h1 className="text-4xl ">Extrato</h1>
+        <div className="flex items-center gap-3">
+          <h2 className="text-2xl">Aqui você vê quais transações você teve</h2>
+        </div>
+      </div>
+
+      <Extrato statement={statement} />
+    </div>
+  );
 }

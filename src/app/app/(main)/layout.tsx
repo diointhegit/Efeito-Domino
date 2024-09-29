@@ -17,21 +17,55 @@ export default async function Layout({
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
   if (!uid) {
-    redirect("/login");
+    redirect("/app/login");
   }
   return (
     <main className="  gap-52  h-screen text-dark-text">
       <div className="w-full flex  justify-between items-center px-20 py-5 bg-light-bg">
-        <div className="cursor-pointer bg-light-bg p-3 rounded-lg flex items-center">
+        <Link
+          href="/app/home"
+          className="cursor-pointer bg-light-bg p-3 rounded-lg flex items-center"
+        >
           <Image src={"/game.svg"} width={30} height={30} alt="domino" />
           <p className=" text-dark-text">Efeito Dominó</p>
-        </div>
-        <Link href="statement"> Extrato </Link>
-        <Link href="goals"> Metas </Link>
-        <Link href="programmed"> Programações </Link>
-        <Link href="teachings"> Educacional </Link>
-        <Link href="statement"> Extrato </Link>
-        <SignOutButton />
+        </Link>
+
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="statement"
+        >
+          {" "}
+          Extrato{" "}
+        </Link>
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="goals"
+        >
+          {" "}
+          Metas{" "}
+        </Link>
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="programmed"
+        >
+          {" "}
+          Programações{" "}
+        </Link>
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="teachings"
+        >
+          {" "}
+          Educacional{" "}
+        </Link>
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="statement"
+        >
+          Extrato
+        </Link>
+
+        <FaUser size={25} className="hover:text-primary" />
       </div>
       {/* <Nav /> */}
       <div>{children}</div>

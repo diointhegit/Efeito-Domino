@@ -1,6 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
-import { MainHeader } from "./saldo";
+import { MainHeader, SecondHeader } from "./saldo";
 import { FaInfoCircle } from "react-icons/fa";
+import { Goals } from "./metas";
 
 export default async function Page() {
   const supabase = createClient();
@@ -17,18 +18,47 @@ export default async function Page() {
   };
 
   const user = await getUser(uid);
+
+  const getProgrammedValues = async (id: string | undefined) => {
+    const { data, error } = await supabase
+      .from("programmed")
+      .select()
+      .eq("userid", id);
+    if (error) {
+      return error;
+    }
+    if (data) {
+      let value = 0;
+      data.forEach((statement) => {
+        if (statement.type == "positive") {
+          value += statement.value;
+        } else {
+          value -= statement.value;
+        }
+      });
+      return value;
+    }
+  };
+
+  const programmedValues = await getProgrammedValues(uid);
+
+  const monthBalance = user.balance + programmedValues;
+
   return (
     <div className="">
-      <div className="px-12 py-5 bg-primary text-light-text">
+      <div className="px-12 py-5 bg-primary text-light-text flex gap-10">
         <MainHeader name={user.name} balance={user.balance} />
+        <div className="min-h-[100px] w-0.5 bg-white"></div>
+        <SecondHeader monthBalance={monthBalance} />
       </div>
 
-      <div>
+      <div className="p-5">
         <h3 className="text-3xl pb-5">Suas metas esse mês:</h3>
-        <div className="h-32 w-[320px]  bg-primary grid  px-5 py-2 rounded-xl text-light-text">
-          <p className="text-xl"> Assinaturas </p>
-          <p className="text-3xl font-bold"> R$ 25,00 </p>
-        </div>
+        <Goals />
+      </div>
+
+      <div className="p-5">
+        <h3 className="text-3xl">Programados para essa semana</h3>
       </div>
     </div>
   );

@@ -17,7 +17,10 @@ export const SignOutButton = () => {
   };
 
   return (
-    <p className="cursor-pointer" onClick={unsign}>
+    <p
+      className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left cursor-pointer"
+      onClick={unsign}
+    >
       {" "}
       Deslogar{" "}
     </p>
