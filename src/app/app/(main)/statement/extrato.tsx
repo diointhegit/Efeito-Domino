@@ -67,7 +67,7 @@ export const ExtratoCard = ({
             >
               <p>{transaction.name}</p>
               <p>
-                {transaction.type == "positive" ? "+ " : "- "}
+                {transaction.type == "income" ? "+ " : "- "}
                 R${" "}
                 {String(Number(transaction.value).toFixed(2)).replace(".", ",")}
               </p>

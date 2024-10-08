@@ -24,9 +24,11 @@ export default function Home() {
           <p className="text-2xl mt-5">
             O que você precisa pra se tornar responsável financeiramente
           </p>
-          <button className="text-2xl mt-4 rounded  text-light-text bg-primary px-5 py-3 hover:text-black hover:bg-white hover:outline-primary hover:outline hover:outline-2 transition-colors ease-in-out ">
-            Comece agora
-          </button>
+          <Link href={"app/home"}>
+            <button className="text-2xl mt-4 rounded  text-light-text bg-primary px-5 py-3 hover:text-black hover:bg-white hover:outline-primary hover:outline hover:outline-2 transition-colors ease-in-out ">
+              Comece agora
+            </button>
+          </Link>
         </div>
       </div>
       <div className="mt-20  m-0  lg:px-32 px-7 bg-primary text-light-text py-12">

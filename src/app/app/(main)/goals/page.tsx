@@ -7,7 +7,8 @@ export default function Page() {
         <h1 className="text-4xl">Metas</h1>{" "}
       </div>
       <p>
-        Gerencie suas metas para você conseguir organizar melhor seu dinheiro
+        Uma meta é o principal motivador! Lembre-se pelo quê você está tentando
+        melhorar{" "}
       </p>
       <div className="flex">
         <h2 className="flex gap-1 items-center text-xs">

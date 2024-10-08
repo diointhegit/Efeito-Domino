@@ -1,5 +1,8 @@
 export const getBalance = async (supabase: any, uid: string | undefined) => {
-  const { data, error } = await supabase.from("user").select().eq("id", uid);
+  const { data, error } = await supabase
+    .from("user")
+    .select()
+    .eq("user_id", uid);
   if (error) {
     return error;
   }
@@ -21,15 +24,19 @@ export const updateBalance = async (
       .update({
         balance: balance - value,
       })
-      .eq("id", uid);
+      .eq("user_id", uid);
     if (error) return error;
   } else {
+    console.log(balance);
+    console.log(value);
+    console.log(balance + value);
     const { error } = await supabase
       .from("user")
       .update({
         balance: balance + value,
       })
-      .eq("id", uid);
+      .eq("user_id", uid);
     if (error) return error;
   }
+  return;
 };

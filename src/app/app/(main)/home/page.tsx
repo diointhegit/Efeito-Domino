@@ -10,7 +10,10 @@ export default async function Page() {
   let uid = data.user?.id;
 
   const getUser = async (id: string | undefined) => {
-    const { data, error } = await supabase.from("user").select().eq("id", id);
+    const { data, error } = await supabase
+      .from("user")
+      .select()
+      .eq("user_id", id);
     if (error) {
       return error;
     }
@@ -23,7 +26,7 @@ export default async function Page() {
     const { data, error } = await supabase
       .from("programmed")
       .select()
-      .eq("userid", id);
+      .eq("user_id", id);
     if (error) {
       return error;
     }
