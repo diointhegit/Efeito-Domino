@@ -5,7 +5,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { TransactionSchema, transactionSchema } from "@/lib/schemas";
 import { BR$Input } from "./currency-input";
 import { createClient } from "@/utils/supabase/client";
-import { getBalance, updateBalance } from "@/lib/supabase-utils";
+import {
+  getBalance,
+  updateBalance,
+  updateStatement,
+} from "@/lib/supabase-utils";
 import { useRouter } from "next/navigation";
 export function AddTransaction({
   close,
@@ -26,21 +30,7 @@ export function AddTransaction({
   });
 
   const onSubmit: SubmitHandler<TransactionSchema> = async (data) => {
-    const updateStatement = async () => {
-      const { error } = await supabase.from("statement").insert({
-        name: data.name,
-        created_at: data.date,
-        value: data.value,
-        userid: uid,
-        category: data.category,
-        type: data.type,
-      });
-      if (error) {
-        console.log(error);
-      }
-      console.log("foi");
-    };
-    updateStatement();
+    updateStatement(supabase, uid, data);
     const balance = await getBalance(supabase, uid);
     await updateBalance(supabase, balance, data.value, data.type, uid);
     router.refresh();

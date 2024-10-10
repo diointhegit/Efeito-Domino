@@ -16,11 +16,3 @@ export type GoalProps = {
   userid: string;
   spentValue: Number;
 };
-
-export type Transaction = {
-  name: string;
-  value: number;
-  type: transactionType;
-  category: string;
-  date: Date;
-};
