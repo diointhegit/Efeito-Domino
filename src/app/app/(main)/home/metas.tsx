@@ -1,50 +1,42 @@
-import { GoalProps } from "@/lib/types";
+import { getControls } from "@/lib/supabase-utils";
+import { controlType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 
 const supabase = createClient();
 
-const getGoals = async (id: string | undefined) => {
-  const { data, error } = await supabase
-    .from("goals")
-    .select()
-    .eq("userid", id);
-  if (error) {
-    return error;
-  }
-  return data;
-};
-
-export const Goals = async () => {
+export const Controls = async () => {
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
-  const goals = (await getGoals(uid)) as any[];
+  const controls = (await getControls(supabase, uid)) as any[];
 
   return (
     <div>
       <div className="flex gap-10">
-        {goals.map((goal) => {
-          return <GoalCard goal={goal} key={goal.id} />;
+        {controls.map((control) => {
+          return <ControlCard control={control} key={control.id} />;
         })}
       </div>
     </div>
   );
 };
 
-export const GoalCard = ({ goal }: { goal: GoalProps }) => {
-  const balance = Number(goal.goalValue) - Number(goal.spentValue);
+export const ControlCard = ({ control }: { control: controlType }) => {
+  const balance = Number(control.controlValue) - Number(control.spentValue);
 
   return (
     <div>
       <div className="h-32 w-[320px]  bg-primary grid  px-5 py-2 rounded-xl text-light-text">
-        <p className="text-xl"> {goal.name} </p>
+        <p className="text-xl"> {control.name} </p>
         <p className="text-3xl font-bold">
           {" "}
-          R$ {String(Number(goal.spentValue).toFixed(2).replace(".", ","))}{" "}
+          R$ {String(
+            Number(control.spentValue).toFixed(2).replace(".", ",")
+          )}{" "}
         </p>
         <p>
           Sua meta é de: R${" "}
-          {String(Number(goal.goalValue).toFixed(2).replace(".", ","))}
+          {String(Number(control.controlValue).toFixed(2).replace(".", ","))}
         </p>
         <p
           className={cn(

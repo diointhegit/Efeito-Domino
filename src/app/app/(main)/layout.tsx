@@ -27,7 +27,6 @@ export default async function Layout({
           className="cursor-pointer bg-light-bg p-3 rounded-lg flex items-center"
         >
           <Image src={"/game.svg"} width={30} height={30} alt="domino" />
-          <p className=" text-dark-text">Efeito Dominó</p>
         </Link>
 
         <Link
@@ -39,17 +38,24 @@ export default async function Layout({
         </Link>
         <Link
           className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
-          href="goals"
-        >
-          {" "}
-          Metas{" "}
-        </Link>
-        <Link
-          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
           href="programmed"
         >
           {" "}
           Programações{" "}
+        </Link>
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="controls"
+        >
+          {" "}
+          Controles{" "}
+        </Link>
+        <Link
+          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+          href="goals"
+        >
+          {" "}
+          Metas{" "}
         </Link>
         <Link
           className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"

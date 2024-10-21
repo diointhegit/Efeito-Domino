@@ -6,9 +6,9 @@ import { TransactionSchema, transactionSchema } from "@/lib/schemas";
 import { BR$Input } from "./currency-input";
 import { createClient } from "@/utils/supabase/client";
 import {
+  addTransaction,
   getBalance,
   updateBalance,
-  updateStatement,
 } from "@/lib/supabase-utils";
 import { useRouter } from "next/navigation";
 export function AddTransaction({
@@ -30,7 +30,7 @@ export function AddTransaction({
   });
 
   const onSubmit: SubmitHandler<TransactionSchema> = async (data) => {
-    updateStatement(supabase, uid, data);
+    addTransaction(supabase, uid, data);
     const balance = await getBalance(supabase, uid);
     await updateBalance(supabase, balance, data.value, data.type, uid);
     router.refresh();

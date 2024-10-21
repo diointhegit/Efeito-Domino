@@ -11,7 +11,7 @@ export const CloseButton = ({
   containerId,
 }: {
   close: () => void;
-  size: number;
+  size?: number;
   className?: string;
   containerId?: string;
 }) => {
@@ -38,6 +38,7 @@ export const CloseButton = ({
       >
         <CgClose size={size} />
       </div>
+
       {areYouSure && (
         <div className="inset-0 z-20 bg-black/50 flex absolute items-center justify-center cursor-default">
           <div className="border-secondary  bg-light-bg border-2 w-[20rem] h-[6rem] p-5">
@@ -66,3 +67,5 @@ export const CloseButton = ({
     </div>
   );
 };
+
+export const CancelButton = () => {};

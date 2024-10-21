@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { MainHeader, SecondHeader } from "./saldo";
 import { FaInfoCircle } from "react-icons/fa";
-import { Goals } from "./metas";
+import { Controls } from "./metas";
 
 export default async function Page() {
   const supabase = createClient();
@@ -57,7 +57,7 @@ export default async function Page() {
 
       <div className="p-5">
         <h3 className="text-3xl pb-5">Suas metas esse mês:</h3>
-        <Goals />
+        <Controls />
       </div>
 
       <div className="p-5">

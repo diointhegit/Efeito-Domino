@@ -8,10 +8,10 @@ export type transactionType = {
   category?: string;
 };
 
-export type GoalProps = {
+export type controlType = {
   id: number;
   until: Date;
-  goalValue: Number;
+  controlValue: Number;
   name: string;
   userid: string;
   spentValue: Number;
