@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL)
   return (
     <main className="">
       <div className=" flex  items-center  justify-around w-screen px-20 pt-12 lg:pl-12 ">
