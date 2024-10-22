@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { MainHeader, SecondHeader } from "./saldo";
 import { FaInfoCircle } from "react-icons/fa";
-import { Controls } from "./metas";
+import { Controls } from "@/components/controls";
 
 export default async function Page() {
   const supabase = createClient();

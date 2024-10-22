@@ -165,7 +165,7 @@ export const getControls = async (
   id: string | undefined
 ) => {
   const { data, error } = await supabase
-    .from("goals")
+    .from("controls")
     .select()
     .eq("userid", id);
   if (error) {
