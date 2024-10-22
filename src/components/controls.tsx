@@ -1,3 +1,4 @@
+import { ControlDetails } from "@/components/control-details";
 import { getControls } from "@/lib/supabase-utils";
 import { controlType } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -9,6 +10,7 @@ export const Controls = async () => {
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
   const controls = (await getControls(supabase, uid)) as any[];
+  console.log(controls);
 
   return (
     <div>
@@ -27,7 +29,10 @@ export const ControlCard = ({ control }: { control: controlType }) => {
   return (
     <div>
       <div className="h-32 w-[320px]  bg-primary grid  px-5 py-2 rounded-xl text-light-text">
-        <p className="text-xl"> {control.name} </p>
+        <div className="flex justify-between">
+          <p className="text-xl"> {control.name} </p>
+          <ControlDetails control={control} />
+        </div>
         <p className="text-3xl font-bold">
           {" "}
           R$ {String(
