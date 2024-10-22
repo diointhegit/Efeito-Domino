@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   console.log(process.env.NEXT_PUBLIC_SUPABASE_URL)
+  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
   return (
     <main className="">
       <div className=" flex  items-center  justify-around w-screen px-20 pt-12 lg:pl-12 ">
@@ -24,12 +25,14 @@ export default function Home() {
           <p className="text-2xl mt-5">
             O que você precisa pra se tornar responsável financeiramente
           </p>
-          <button className="text-2xl mt-4 rounded  text-light-text bg-primary px-5 py-3 hover:text-black hover:bg-white hover:outline-primary hover:outline hover:outline-2 transition-colors ease-in-out ">
-            Comece agora
-          </button>
+          <Link href={"app/home"}>
+            <button className="text-2xl mt-4 rounded  text-light-text bg-primary px-5 py-3 hover:text-black hover:bg-white hover:outline-primary hover:outline hover:outline-2 transition-colors ease-in-out ">
+              Comece agora
+            </button>
+          </Link>
         </div>
       </div>
-      <div className="mt-20 h-[90vh] m-0  lg:px-32 px-7 bg-primary text-light-text py-12">
+      <div className="mt-20  m-0  lg:px-32 px-7 bg-primary text-light-text py-12">
         <h2 className="text-5xl my-10">O que é o Efeito Dominó?</h2>
         <p className=" text-left text-2xl w-2/3">
           Efeito Dominó é focado em apoiar os jovens que possuem a
@@ -37,7 +40,6 @@ export default function Home() {
           dilemas em relação ao dinheiro e a organização acaba ficando em
           segundo plano, de modo que o imediatismo para gastar sem pensar no
           amanhã gera um <b> efeito dominó</b>
-          {" "}.
         </p>
         <div className="mt-20">
           <h2 className="text-3xl py-4">Aplicativo</h2>

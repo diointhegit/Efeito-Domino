@@ -5,7 +5,13 @@ import { transactionType } from "@/lib/types";
 import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
 
-export const Extrato = ({ statement }: { statement: transactionType[] }) => {
+export const Extrato = ({
+  statement,
+  uid,
+}: {
+  statement: transactionType[];
+  uid: string | undefined;
+}) => {
   const [addTransaction, setAddTransaction] = useState(false);
 
   const openAddTransaction = () => {
@@ -20,7 +26,9 @@ export const Extrato = ({ statement }: { statement: transactionType[] }) => {
         statement={statement}
         openAddTransaction={openAddTransaction}
       />
-      {addTransaction && <AddTransaction close={closeAddTransaction} />}
+      {addTransaction && (
+        <AddTransaction uid={uid} close={closeAddTransaction} />
+      )}
     </div>
   );
 };
@@ -45,22 +53,21 @@ export const ExtratoCard = ({
             onClick={openAddTransaction}
           >
             Adicionar transação
-            <BiPlus size={30} />
+            <BiPlus aria-label="ícone de Mais" size={30} />
           </div>
         </div>
       </div>
 
       {statement &&
         statement.map((transaction: transactionType) => {
-          let date = transaction.created_at;
           return (
             <div
               key={transaction.id}
-              className="bg-light-bg md:text-lg px-4 py-4 grid md:grid-cols-4 grid-cols-2 rounded-xl "
+              className="bg-light-bg  md:text-lg px-4 py-4 grid md:grid-cols-4 grid-cols-2 rounded-xl "
             >
               <p>{transaction.name}</p>
               <p>
-                {transaction.type == "positive" ? "+ " : "- "}
+                {transaction.type == "income" ? "+ " : "- "}
                 R${" "}
                 {String(Number(transaction.value).toFixed(2)).replace(".", ",")}
               </p>

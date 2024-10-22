@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { MainHeader, SecondHeader } from "./saldo";
 import { FaInfoCircle } from "react-icons/fa";
-import { Goals } from "./metas";
+import { Controls } from "./metas";
 
 export default async function Page() {
   const supabase = createClient();
@@ -10,7 +10,10 @@ export default async function Page() {
   let uid = data.user?.id;
 
   const getUser = async (id: string | undefined) => {
-    const { data, error } = await supabase.from("user").select().eq("id", id);
+    const { data, error } = await supabase
+      .from("user")
+      .select()
+      .eq("user_id", id);
     if (error) {
       return error;
     }
@@ -23,7 +26,7 @@ export default async function Page() {
     const { data, error } = await supabase
       .from("programmed")
       .select()
-      .eq("userid", id);
+      .eq("user_id", id);
     if (error) {
       return error;
     }
@@ -54,7 +57,7 @@ export default async function Page() {
 
       <div className="p-5">
         <h3 className="text-3xl pb-5">Suas metas esse mês:</h3>
-        <Goals />
+        <Controls />
       </div>
 
       <div className="p-5">
