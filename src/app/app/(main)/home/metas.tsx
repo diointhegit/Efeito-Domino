@@ -12,11 +12,16 @@ export const Controls = async () => {
 
   return (
     <div>
-      <div className="flex gap-10">
-        {controls.map((control) => {
-          return <ControlCard control={control} key={control.id} />;
-        })}
-      </div>
+      {controls.length > 0 ? (
+
+        <div className="flex gap-10">
+          {controls.map((control) => {
+            return <ControlCard control={control} key={control.id} />;
+          })}
+        </div>
+      ): (
+        <div className="flex gap-10">Nenhuma meta cadastrada</div>
+      )}
     </div>
   );
 };
