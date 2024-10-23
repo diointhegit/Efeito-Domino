@@ -6,6 +6,8 @@ import { FaUser } from "react-icons/fa";
 import { SignOutButton } from "./statement/logoutbutton";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { supabaseLogOut } from "@/lib/supabase-utils";
+import { LogoutButton } from "@/components/logout-button";
 
 export default async function Layout({
   children,
@@ -70,8 +72,10 @@ export default async function Layout({
         >
           Extrato
         </Link>
-
-        <FaUser size={25} className="hover:text-primary" />
+        <div className="dropdown-menu">
+          <FaUser size={25} className="hover:text-primary " />
+          <LogoutButton />
+        </div>
       </div>
       {/* <Nav /> */}
       <div>{children}</div>

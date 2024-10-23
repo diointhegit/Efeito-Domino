@@ -2,6 +2,12 @@ import { createClient } from "@/utils/supabase/server";
 import { MainHeader, SecondHeader } from "./saldo";
 import { FaInfoCircle } from "react-icons/fa";
 import { Controls } from "@/components/controls";
+import { AddProgrammedTransaction } from "../programmed/add-programmed";
+import { AddTransaction } from "@/components/add-transaction";
+import {
+  ShortcutAddProgrammedTransaction,
+  ShortcutAddTransaction,
+} from "@/components/shortcuts-home";
 
 export default async function Page() {
   const supabase = createClient();
@@ -53,6 +59,14 @@ export default async function Page() {
         <MainHeader name={user.name} balance={user.balance} />
         <div className="min-h-[100px] w-0.5 bg-white"></div>
         <SecondHeader monthBalance={monthBalance} />
+      </div>
+
+      <div className="p-5 ">
+        <p className="text-2xl">Atalhos:</p>
+        <div className="flex gap-5">
+          <ShortcutAddTransaction uid={uid} />
+          <ShortcutAddProgrammedTransaction uid={uid} />
+        </div>
       </div>
 
       <div className="p-5">

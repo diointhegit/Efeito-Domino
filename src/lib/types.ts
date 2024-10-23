@@ -11,8 +11,8 @@ export type transactionType = {
 export type controlType = {
   id: number;
   until: Date;
-  controlValue: Number;
+  controlValue: number;
   name: string;
   userid: string;
-  spentValue: Number;
+  spentValue: number;
 };

@@ -17,7 +17,7 @@ export default async function Page() {
 
     if (authError) {
       console.error("Erro ao criar autenticação:", authError);
-      redirect("/error");
+      // redirect("/error");
     }
 
     // Se o usuário foi criado, insere o nome e data de nascimento na tabela 'user'
@@ -38,7 +38,7 @@ export default async function Page() {
       }
 
       revalidatePath("/"); // Revalida o cache (se necessário)
-      redirect("/login"); // Redireciona para a página de login
+      redirect("/app/login"); // Redireciona para a página de login
     }
   }
 

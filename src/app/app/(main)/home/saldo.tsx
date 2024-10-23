@@ -67,7 +67,7 @@ export const SecondHeader = ({
       <p className="text-4xl"> Panorama mensal </p>
       <p> Esse panorama leva em consideração seus próximos 30 dias</p>
       <div className="flex items-center gap-5">
-        <p className="text-xl">Saldo disponível:</p>
+        <p className="text-xl">Saldo previsto:</p>
         <FaEyeSlash
           onClick={handleEyeSlashed}
           className={cn(isEyeSlashed ? "block" : "hidden", "size-7 ")}

@@ -167,9 +167,15 @@ export const getControls = async (
   const { data, error } = await supabase
     .from("controls")
     .select()
-    .eq("userid", id);
+    .eq("user_id", id);
   if (error) {
     return error;
   }
   return data;
+};
+
+// auth functions
+
+export const supabaseLogOut = async (supabase: SupabaseClient) => {
+  const { error } = await supabase.auth.signOut();
 };
