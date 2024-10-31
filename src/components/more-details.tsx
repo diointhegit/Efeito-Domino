@@ -4,31 +4,44 @@ import { DiVim } from "react-icons/di";
 import { CloseButton } from "./close-button";
 import { deleteProgrammed, programmedToStatement } from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 export const MoreDetails = ({
   transaction,
   date,
+  className,
 }: {
+  className?: string;
   transaction: any;
   date: string;
 }) => {
   const [open, setOpen] = useState(false);
+  const [openReschedule, setOpenReschedule] = useState(false);
   const supabase = createClient();
+  const router = useRouter();
 
   const handleOpen = () => {
     setOpen(true);
   };
-
+  const handleOpenReschedule = () => {
+    setOpenReschedule(true);
+  };
+  const handleCloseSchedule = () => {
+    setOpenReschedule(true);
+  };
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleAccept = () => {
-    programmedToStatement(supabase, transaction);
+  const handleAccept = async () => {
+    // await programmedToStatement(supabase, transaction);
+    handleClose();
+    handleOpenReschedule();
+    // router.refresh();
   };
   return (
-    <div>
+    <div className={cn(className)}>
       <OpenButton open={handleOpen} />
-
       {open && (
         <div className="absolute flex inset-0 justify-center items-center bg-black/50">
           <div className="bg-light-bg h-[16rem] w-[30rem] py-6 rounded-md flex  flex-col justify-between">
@@ -59,6 +72,7 @@ export const MoreDetails = ({
           </div>
         </div>
       )}
+      {openReschedule && <RescheduleTransaction close={handleCloseSchedule} />}
     </div>
   );
 };
@@ -72,5 +86,29 @@ export const OpenButton = ({ open }: { open: () => void }) => {
       {" "}
       Mais detalhes{" "}
     </button>
+  );
+};
+
+export const RescheduleTransaction = ({ close }: { close: () => void }) => {
+  return (
+    <div className="flex inset-0 h-screen w-screen absolute bg-black/40 justify-center items-center">
+      <div className="bg-light-bg w-[30rem] h-[20rem] px-5 rounded-md flex flex-col justify-around">
+        <div className="grid">
+          Você deseja programar essa mesma transação para outro momento?
+          <select name="time" id="" className="outline-1 outline outline-black">
+            <option value="1">Amanhã</option>
+            <option value="7">Semana que vem</option>
+            <option value="14">Duas semanas</option>
+            <option value="15">Daqui 15 dias</option>
+            <option value="30">Daqui 30 dias</option>
+            <option value="month">Mês que vem</option>
+          </select>
+        </div>
+        <div className="flex justify-around">
+          <button>Não</button>
+          <button>Vamos reprogramar!</button>
+        </div>
+      </div>
+    </div>
   );
 };

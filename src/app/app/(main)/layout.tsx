@@ -29,6 +29,7 @@ export default async function Layout({
           className="cursor-pointer bg-light-bg p-3 rounded-lg flex items-center"
         >
           <Image src={"/game.svg"} width={30} height={30} alt="domino" />
+          Início
         </Link>
 
         <Link

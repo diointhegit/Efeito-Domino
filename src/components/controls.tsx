@@ -10,18 +10,16 @@ export const Controls = async () => {
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
   const controls = (await getControls(supabase, uid)) as any[];
-  console.log(controls);
 
   return (
     <div>
       {controls.length > 0 ? (
-
         <div className="flex gap-10">
           {controls.map((control) => {
             return <ControlCard control={control} key={control.id} />;
           })}
         </div>
-      ): (
+      ) : (
         <div className="flex gap-10">Nenhuma meta cadastrada</div>
       )}
     </div>

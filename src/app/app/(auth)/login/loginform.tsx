@@ -74,16 +74,14 @@ export const LoginForm = () => {
         type="submit"
         className="border-light-bg border-2 hover:bg-light-bg hover:outline text-light-text grid place-items-center hover:text-dark-text outline-1 px-5 text-center h-12 transition-all ease-in-out"
       >
-        Login
+        Entrar
       </button>
       <p className="">
-        Não tem uma conta?{" "}
         <Link
           href="register"
           className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
         >
-          {" "}
-          Cadastre-se{" "}
+          Quero criar uma conta!
         </Link>
       </p>
     </form>

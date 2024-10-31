@@ -27,10 +27,6 @@ export default async function Page() {
         <h1 className="text-4xl ">Extrato</h1>
         <div className="flex items-center justify-between">
           <h2 className="text-2xl">Aqui você vê quais transações você teve</h2>
-          <div className="flex items-center text-xs cursor-pointer lg:hidden">
-            Ver categorias
-            <BiChevronRight size={20} className="" />
-          </div>
         </div>
       </div>
 

@@ -1,3 +1,5 @@
+import { PostgrestError } from "@supabase/supabase-js";
+
 export type transactionType = {
   id: number;
   created_at: Date;
@@ -16,3 +18,5 @@ export type controlType = {
   userid: string;
   spentValue: number;
 };
+
+export type supabaseReturnType = any[] | PostgrestError;

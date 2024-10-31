@@ -8,6 +8,17 @@ import {
   ShortcutAddProgrammedTransaction,
   ShortcutAddTransaction,
 } from "@/components/shortcuts-home";
+import { ProgrammedShortcut } from "@/components/programmed-shortcut";
+import { getProgrammed } from "@/lib/supabase-utils";
+import { supabaseReturnType, transactionType } from "@/lib/types";
+import {
+  addDays,
+  isPast,
+  isSameWeek,
+  isThisWeek,
+  isWithinInterval,
+} from "date-fns";
+import { programmedTransactionType } from "@/lib/schemas";
 
 export default async function Page() {
   const supabase = createClient();
@@ -28,18 +39,11 @@ export default async function Page() {
 
   const user = await getUser(uid);
 
-  const getProgrammedValues = async (id: string | undefined) => {
-    const { data, error } = await supabase
-      .from("programmed")
-      .select()
-      .eq("user_id", id);
-    if (error) {
-      return error;
-    }
-    if (data) {
+  const getProgrammedValues = async (programmed: any[]) => {
+    if (Array.isArray(programmed)) {
       let value = 0;
-      data.forEach((statement) => {
-        if (statement.type == "positive") {
+      programmed.forEach((statement) => {
+        if (statement.type == "income") {
           value += statement.value;
         } else {
           value -= statement.value;
@@ -49,10 +53,35 @@ export default async function Page() {
     }
   };
 
-  const programmedValues = await getProgrammedValues(uid);
+  const getProgrammedInThisWeek = (programmed: supabaseReturnType) => {
+    let thisWeek: programmedTransactionType[] = [];
+    const isThisWeekOrPast = (date: Date) => {};
 
+    if (programmed instanceof Array) {
+      programmed.forEach((transaction: programmedTransactionType) => {
+        // checks if its past or in 7 days
+        if (
+          isWithinInterval(transaction.date, {
+            start: new Date(),
+            end: addDays(Date.now(), 7),
+          }) ||
+          isPast(transaction.date)
+        ) {
+          thisWeek.push(transaction);
+        }
+      });
+      thisWeek.sort(
+        (a, b) => Number(new Date(a.date)) - Number(new Date(b.date))
+      );
+      return thisWeek;
+    }
+    return [];
+  };
+
+  const programmed = (await getProgrammed(supabase, uid)) as any[];
+  const programmedValues = await getProgrammedValues(programmed);
+  const programmedThisWeek = getProgrammedInThisWeek(programmed);
   const monthBalance = user.balance + programmedValues;
-
   return (
     <div className="">
       <div className="px-12 py-5 bg-primary text-light-text flex gap-10">
@@ -69,13 +98,21 @@ export default async function Page() {
         </div>
       </div>
 
-      <div className="p-5">
-        <h3 className="text-3xl pb-5">Suas metas esse mês:</h3>
+      <div className="p-4">
+        <h3 className="text-3xl pb-5">Seus controles esse mês:</h3>
         <Controls />
       </div>
 
       <div className="p-5">
-        <h3 className="text-3xl">Programados para essa semana</h3>
+        <h3 className="text-3xl mb-2">Programações recentes</h3>
+        <div
+          className="space-y-3 bg-primary rounded-md px-5 py-8 overflow-y-scroll"
+          id="hide_scrollbar"
+        >
+          {programmedThisWeek.map((transaction: any) => {
+            return <ProgrammedShortcut transaction={transaction} />;
+          })}
+        </div>
       </div>
     </div>
   );

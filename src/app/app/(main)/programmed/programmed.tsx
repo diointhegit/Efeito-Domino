@@ -36,10 +36,8 @@ export const ProgrammedStatement = ({
         {programmed.map((transaction: any) => {
           let date = dateToBRStringDate(transaction.date);
           return (
-            <div className="bg-light-bg  md:text-lg px-4 py-4 grid md:grid-cols-4 grid-cols-2 rounded-xl ">
-              <div className="flex gap-5">
-                <p>{transaction.name}</p>
-              </div>
+            <div className="bg-light-bg  md:text-lg px-4 py-4 grid md:grid-cols-4 grid-cols-2 rounded-xl gap-2 items-center ">
+              <p>{transaction.name}</p>
               <p>
                 {transaction.type == "debt" ? "- " : "+ "}R$
                 {Number(transaction.value).toFixed(2)}

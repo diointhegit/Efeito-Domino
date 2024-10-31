@@ -38,8 +38,8 @@ export const AddProgrammedTransaction = ({
   // submitting the form
   const onSubmit: SubmitHandler<programmedTransactionType> = async (data) => {
     await addProgrammedTransaction(supabase, uid as string, data);
-    router.refresh();
     close();
+    router.refresh();
   };
 
   return (

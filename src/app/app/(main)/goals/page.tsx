@@ -1,6 +1,12 @@
+import { getGoals, getUid } from "@/lib/supabase-utils";
+import { createClient } from "@/utils/supabase/server";
 import { FaPlus } from "react-icons/fa";
 
-export default function Page() {
+export default async function Page() {
+  const supabase = createClient();
+  const uid = await getUid(supabase);
+  const goals = await getGoals(supabase, uid);
+  console.log(goals);
   return (
     <div>
       <div className="flex">

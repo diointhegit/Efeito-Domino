@@ -4,7 +4,7 @@ export function ISOToBRStringDate(date: Date): string {
     .slice(5, 7)}/${date.toISOString().slice(0, 4)}`;
 }
 
-export function dateToBRStringDate(date: Date): string {
+export function dateToBRStringDate(date: Date | string): string {
   return `${date.toString().slice(8, 10)}/${date.toString().slice(5, 7)}/${date
     .toString()
     .slice(0, 4)}`;

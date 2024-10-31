@@ -42,7 +42,7 @@ export default async function Page() {
   return (
     <div className="w-[350px] shadow-2xl bg-primary border-dark-bg border-2 py-10 rounded-md text-light-text">
       <h1 className="text-4xl text-center mb-5 text-light-text font-bold">
-        Login
+        Entre na sua conta
       </h1>
       <LoginForm />
     </div>

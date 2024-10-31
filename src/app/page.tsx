@@ -11,7 +11,6 @@ export default function Home() {
           <Image src="/game.svg" width={50} height={50} alt="3 dominos" />
           <p>Efeito Dominó</p>
         </div>
-        <Link href="app/login">Acessar o app</Link>
       </div>
       <div className="md:flex-row h-[90vh]  justify-center flex gap-10 w-screen flex-col-reverse  lg:px-0 items-center  ">
         <Image

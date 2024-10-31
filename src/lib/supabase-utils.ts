@@ -74,6 +74,20 @@ export const getProgrammed = async (
   return data;
 };
 
+export const getGoals = async (
+  supabase: SupabaseClient,
+  uid: string | undefined
+) => {
+  const { data, error } = await supabase
+    .from("goals")
+    .select()
+    .eq("user_id", uid);
+  if (error) {
+    return error;
+  }
+  return data;
+};
+
 export const addTransaction = async (
   supabase: SupabaseClient,
   uid: string | undefined,
