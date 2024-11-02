@@ -43,7 +43,7 @@ export const ProgrammedStatement = ({
                 {Number(transaction.value).toFixed(2)}
               </p>
               <p>{date}</p>
-              <MoreDetails transaction={transaction} date={date} />
+              <MoreDetails transaction={transaction} date={date} uid={uid} />
             </div>
           );
         })}

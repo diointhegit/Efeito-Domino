@@ -48,3 +48,8 @@ export const programmedTransactionSchema = z.object({
 export type programmedTransactionType = z.infer<
   typeof programmedTransactionSchema
 >;
+
+export const reprogramSchema = z.object({
+  futureTime: z.string(),
+});
+export type reprogramType = z.infer<typeof reprogramSchema>;

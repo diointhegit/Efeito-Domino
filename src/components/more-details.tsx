@@ -6,14 +6,18 @@ import { deleteProgrammed, programmedToStatement } from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { ReprogramTransaction } from "./reprogram-transaction";
+import { programmedTransactionType } from "@/lib/schemas";
 export const MoreDetails = ({
   transaction,
   date,
   className,
+  uid,
 }: {
   className?: string;
   transaction: any;
   date: string;
+  uid: string | undefined;
 }) => {
   const [open, setOpen] = useState(false);
   const [openReschedule, setOpenReschedule] = useState(false);
@@ -27,17 +31,15 @@ export const MoreDetails = ({
     setOpenReschedule(true);
   };
   const handleCloseSchedule = () => {
-    setOpenReschedule(true);
+    setOpenReschedule(false);
   };
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleAccept = async () => {
-    // await programmedToStatement(supabase, transaction);
     handleClose();
     handleOpenReschedule();
-    // router.refresh();
   };
   return (
     <div className={cn(className)}>
@@ -72,7 +74,14 @@ export const MoreDetails = ({
           </div>
         </div>
       )}
-      {openReschedule && <RescheduleTransaction close={handleCloseSchedule} />}
+      {openReschedule && (
+        <RescheduleTransaction
+          transaction={transaction}
+          close={handleClose}
+          closeReschedule={handleCloseSchedule}
+          uid={uid}
+        />
+      )}
     </div>
   );
 };
@@ -89,26 +98,25 @@ export const OpenButton = ({ open }: { open: () => void }) => {
   );
 };
 
-export const RescheduleTransaction = ({ close }: { close: () => void }) => {
+export const RescheduleTransaction = ({
+  uid,
+  close,
+  closeReschedule,
+  transaction,
+}: {
+  close: () => void;
+  closeReschedule: () => void;
+  uid: string | undefined;
+  transaction: programmedTransactionType;
+}) => {
   return (
     <div className="flex inset-0 h-screen w-screen absolute bg-black/40 justify-center items-center">
-      <div className="bg-light-bg w-[30rem] h-[20rem] px-5 rounded-md flex flex-col justify-around">
-        <div className="grid">
-          Você deseja programar essa mesma transação para outro momento?
-          <select name="time" id="" className="outline-1 outline outline-black">
-            <option value="1">Amanhã</option>
-            <option value="7">Semana que vem</option>
-            <option value="14">Duas semanas</option>
-            <option value="15">Daqui 15 dias</option>
-            <option value="30">Daqui 30 dias</option>
-            <option value="month">Mês que vem</option>
-          </select>
-        </div>
-        <div className="flex justify-around">
-          <button>Não</button>
-          <button>Vamos reprogramar!</button>
-        </div>
-      </div>
+      <ReprogramTransaction
+        close={close}
+        closeReschedule={closeReschedule}
+        transaction={transaction}
+        uid={uid}
+      />
     </div>
   );
 };

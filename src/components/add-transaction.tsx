@@ -20,7 +20,6 @@ export function AddTransaction({
 }) {
   const router = useRouter();
   const supabase = createClient();
-
   const {
     register,
     handleSubmit,

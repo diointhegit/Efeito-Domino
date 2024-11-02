@@ -1,6 +1,11 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { programmedTransactionType, TransactionSchema } from "./schemas";
+import {
+  programmedTransactionType,
+  reprogramType,
+  TransactionSchema,
+} from "./schemas";
 import { transactionType } from "./types";
+import { addDays, addMonths } from "date-fns";
 
 export const getBalance = async (
   supabase: SupabaseClient,
@@ -192,4 +197,24 @@ export const getControls = async (
 
 export const supabaseLogOut = async (supabase: SupabaseClient) => {
   const { error } = await supabase.auth.signOut();
+};
+
+export const reprogramProgrammed = async (
+  supabase: SupabaseClient,
+  uid: string | undefined,
+  transaction: programmedTransactionType,
+  futureTime: string
+) => {
+  console.log(transaction);
+  if (futureTime == "month") {
+    console.log(transaction.date);
+    transaction.date = addMonths(transaction.date, 1);
+    console.log(transaction);
+    await addProgrammedTransaction(supabase, uid as string, transaction);
+    return;
+  }
+
+  transaction.date = addDays(new Date(), Number(futureTime));
+  await addProgrammedTransaction(supabase, uid as string, transaction);
+  return;
 };

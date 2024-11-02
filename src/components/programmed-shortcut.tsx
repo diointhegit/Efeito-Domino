@@ -3,7 +3,13 @@ import { toBRCurrency } from "@/lib/currency";
 import { dateToBRStringDate } from "@/lib/timefns";
 import { MoreDetails } from "./more-details";
 
-export const ProgrammedShortcut = ({ transaction }: { transaction: any }) => {
+export const ProgrammedShortcut = ({
+  transaction,
+  uid,
+}: {
+  transaction: any;
+  uid: string | undefined;
+}) => {
   return (
     <div className="px-5 bg-light-bg rounded-md  py-5 grid grid-cols-4 ">
       <p>{transaction.name}</p>
@@ -13,6 +19,7 @@ export const ProgrammedShortcut = ({ transaction }: { transaction: any }) => {
       </p>
       <p>{dateToBRStringDate(transaction.date)}</p>
       <MoreDetails
+        uid={uid}
         className="text-dark-text"
         transaction={transaction}
         date={transaction.date}

@@ -110,7 +110,7 @@ export default async function Page() {
           id="hide_scrollbar"
         >
           {programmedThisWeek.map((transaction: any) => {
-            return <ProgrammedShortcut transaction={transaction} />;
+            return <ProgrammedShortcut transaction={transaction} uid={uid} />;
           })}
         </div>
       </div>
