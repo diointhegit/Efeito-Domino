@@ -58,7 +58,8 @@ export const SecondHeader = ({
   monthBalance: number | PostgrestError | undefined;
 }) => {
   const [isEyeSlashed, setEyeSlashed] = useState(true);
-
+  monthBalance = Number.isNaN(monthBalance) ? 0.00 : monthBalance
+  console.log(monthBalance)
   const handleEyeSlashed = () => {
     setEyeSlashed(!isEyeSlashed);
   };
