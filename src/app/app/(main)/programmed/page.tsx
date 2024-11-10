@@ -11,7 +11,7 @@ export default async function Page() {
   const programmed = await getProgrammed(supabase, uid);
 
   return (
-    <div className="px-5 ">
+    <div className="px-5 flex flex-col items-center text-left md:block md:px-20">
       <div className="w-4/5">
         <h2 className="text-2xl">Programações</h2>
         <p>

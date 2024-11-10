@@ -112,6 +112,14 @@ export default async function Page() {
           {programmedThisWeek.map((transaction: any) => {
             return <ProgrammedShortcut transaction={transaction} uid={uid} />;
           })}
+
+          {programmedThisWeek.length == 0 ? (
+            <p className="text-light-text">
+              Não há nenhuma transação programada para essa semana
+            </p>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

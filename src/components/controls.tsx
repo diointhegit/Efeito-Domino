@@ -20,7 +20,7 @@ export const Controls = async () => {
           })}
         </div>
       ) : (
-        <div className="flex gap-10">Nenhuma meta cadastrada</div>
+        <div className="flex gap-10">Nenhum controle cadastrada</div>
       )}
     </div>
   );
