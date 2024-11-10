@@ -81,11 +81,11 @@ export default async function Page() {
   const programmed = (await getProgrammed(supabase, uid)) as any[];
   const programmedValues = await getProgrammedValues(programmed);
   const programmedThisWeek = getProgrammedInThisWeek(programmed);
-  const monthBalance = user.balance + programmedValues;
+  const monthBalance = user?.balance + programmedValues;
   return (
     <div className="">
       <div className="px-12 py-5 bg-primary text-light-text flex gap-10">
-        <MainHeader name={user.name} balance={user.balance} />
+        <MainHeader name={user?.name} balance={user?.balance} />
         <div className="min-h-[100px] w-0.5 bg-white"></div>
         <SecondHeader monthBalance={monthBalance} />
       </div>

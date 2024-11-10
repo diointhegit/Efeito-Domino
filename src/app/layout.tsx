@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="PT-BR">
-      <body className={LexendDeca.className}>
+     <body className={`${LexendDeca.className}`}>
         <div className="overflow-x-hidden">{children}</div>
       </body>
     </html>

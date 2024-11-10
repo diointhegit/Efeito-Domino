@@ -1,0 +1,104 @@
+:root {
+    --primary-color: #007BFF; /* Azul principal */
+    --text-color-light: #FFFFFF;
+    --bg-light: #F8F9FA; /* Cor de fundo clara */
+    --bg-dark: #343A40;
+  }
+  
+  body {
+    font-family: 'Lexend Deca', sans-serif;
+    background-color: var(--bg-light);
+  }
+  
+  .container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .left-section,
+  .right-section {
+    background-color: var(--bg-light);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .left-section .button-group button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .left-section .button-group button:hover {
+    background-color: var(--bg-dark);
+    color: var(--primary-color);
+  }
+  
+  .left-section input,
+  .left-section select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .left-section label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .simulate-button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .simulate-button:hover {
+    background-color: var(--bg-dark);
+    color: var(--primary-color);
+  }
+  
+  .right-section {
+    background-color: #F1F1F1;
+    color: var(--bg-dark);
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+  }
+  
+  .result-value {
+    font-size: 2em;
+    color: #28a745;
+    margin-top: 10px;
+  }
+  
+  .result-summary {
+    font-size: 1em;
+    color: var(--bg-dark);
+  }
+  
+  .start-investing-button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .start-investing-button:hover {
+    background-color: var(--bg-dark);
+    color: var(--primary-color);
+  }
+  
