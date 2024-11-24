@@ -6,18 +6,25 @@ import { TransactionSchema, transactionSchema } from "@/lib/schemas";
 import { BR$Input } from "./currency-input";
 import { createClient } from "@/utils/supabase/client";
 import {
+  addToControl,
   addTransaction,
   getBalance,
+  getControl,
+  quickControlType,
   updateBalance,
 } from "@/lib/supabase-utils";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 export function AddTransaction({
   close,
+  categories,
   uid,
 }: {
   close: () => void;
+  categories: { name: string; id: number; value: number }[];
   uid: string | undefined;
 }) {
+  const [isDebt, setIsDebt] = useState(false);
   const router = useRouter();
   const supabase = createClient();
   const {
@@ -29,13 +36,40 @@ export function AddTransaction({
   });
 
   const onSubmit: SubmitHandler<TransactionSchema> = async (data) => {
-    addTransaction(supabase, uid, data);
-    const balance = await getBalance(supabase, uid);
-    await updateBalance(supabase, balance, data.value, data.type, uid);
-    router.refresh();
-    close();
-  };
+    if (!isDebt) {
+      data.type == "Income";
+    }
+    if (data.category) {
+      const category = data.category.split(" ");
+      console.log(category);
 
+      (data.categoryId = Number(category[0])),
+        (data.categoryName = category[1]);
+      data.categoryValue = Number(category[2]);
+      await addTransaction(supabase, uid, data);
+      const balance = await getBalance(supabase, uid);
+      await updateBalance(supabase, balance, data.value, data.type, uid);
+
+      console.log(
+        await addToControl(
+          supabase,
+          data.value,
+          data.categoryId,
+          data.categoryValue
+        )
+      );
+      router.refresh();
+      close();
+    }
+  };
+  const checkDebt = (e) => {
+    if (e.target.value == "debt") {
+      setIsDebt(true);
+    } else {
+      setIsDebt(false);
+    }
+  };
+  console.log(categories);
   return (
     <div
       id="addTransaction"
@@ -69,6 +103,7 @@ export function AddTransaction({
             <label htmlFor="type">Tipo</label>
             <select
               {...register("type")}
+              onBlur={(e) => checkDebt(e)}
               className="border-2  p-1.5 border-black rounded-md"
               name="type"
             >
@@ -79,15 +114,25 @@ export function AddTransaction({
 
             <label htmlFor="category">Categoria</label>
             <select
+              {...register("category")}
               name="category"
               id=""
               className=" p-1.5 border-2 rounded-md border-black"
             >
-              <option className=" p-1.5 rounded-md"> Indefinido </option>
+              {isDebt && categories
+                ? categories.map((category: quickControlType) => {
+                    return (
+                      <option value={`${category.id} ${category.name}`}>
+                        {category.name}
+                      </option>
+                    );
+                  })
+                : ""}
+              <option value="Undefined">Indefinido</option>
             </select>
             {errors.category && <p>{errors.category.message}</p>}
           </div>
-          <div className="flex gap-5 py-5 ">
+          <div className="flex gap-5">
             <button type="submit" className="border border-black px-5 py-2">
               Adicionar transação{" "}
             </button>

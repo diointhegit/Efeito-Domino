@@ -9,7 +9,7 @@ import {
   ShortcutAddTransaction,
 } from "@/components/shortcuts-home";
 import { ProgrammedShortcut } from "@/components/programmed-shortcut";
-import { getProgrammed } from "@/lib/supabase-utils";
+import { getCategories, getProgrammed } from "@/lib/supabase-utils";
 import { supabaseReturnType, transactionType } from "@/lib/types";
 import {
   addDays,
@@ -77,7 +77,8 @@ export default async function Page() {
     }
     return [];
   };
-
+  const categories = await getCategories(supabase, uid);
+  console.log(categories);
   const programmed = (await getProgrammed(supabase, uid)) as any[];
   const programmedValues = await getProgrammedValues(programmed);
   const programmedThisWeek = getProgrammedInThisWeek(programmed);
@@ -93,14 +94,16 @@ export default async function Page() {
       <div className="p-5 ">
         <p className="text-2xl">Atalhos:</p>
         <div className="flex gap-5">
-          <ShortcutAddTransaction uid={uid} />
+          <ShortcutAddTransaction categories={categories} uid={uid} />
           <ShortcutAddProgrammedTransaction uid={uid} />
         </div>
       </div>
 
       <div className="p-4">
         <h3 className="text-3xl pb-5">Seus controles esse mês:</h3>
-        <Controls />
+        <div className="">
+          <Controls displayType="scroll" />
+        </div>
       </div>
 
       <div className="p-5">

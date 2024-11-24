@@ -2,9 +2,12 @@
 import { useState } from "react";
 import { AddTransaction } from "./add-transaction";
 import { AddProgrammedTransaction } from "@/app/app/(main)/programmed/add-programmed";
+import { quickControlType } from "@/lib/supabase-utils";
 export const ShortcutAddTransaction = ({
   uid,
+  categories,
 }: {
+  categories: quickControlType[];
   uid: string | undefined;
 }) => {
   const [isOpen, setOpen] = useState(false);
@@ -16,6 +19,7 @@ export const ShortcutAddTransaction = ({
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       <button
@@ -24,7 +28,9 @@ export const ShortcutAddTransaction = ({
       >
         Adicionar transação
       </button>
-      {isOpen && <AddTransaction close={handleClose} uid={uid} />}
+      {isOpen && (
+        <AddTransaction close={handleClose} uid={uid} categories={categories} />
+      )}
     </div>
   );
 };

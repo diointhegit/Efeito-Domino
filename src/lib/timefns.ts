@@ -9,3 +9,7 @@ export function dateToBRStringDate(date: Date | string): string {
     .toString()
     .slice(0, 4)}`;
 }
+
+export function BRStringDateToDate(date: Date | string): string {
+  return `${date.toString().slice(8, 15)}-${date.toString().slice(0, 2)}-${date.toString().slice(6, 10)}`;
+}

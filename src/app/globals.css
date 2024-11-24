@@ -60,3 +60,23 @@ a:hover:after {
   transform: scaleX(1);
   color: white;
 } */
+
+::-webkit-scrollbar {
+  width: 2px;
+  margin: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #22c55e;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #003ba8;
+  width: 10%;
+}

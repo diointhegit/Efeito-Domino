@@ -67,12 +67,7 @@ export default async function Layout({
           {" "}
           Educacional{" "}
         </Link>
-        <Link
-          className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
-          href="statement"
-        >
-          Extrato
-        </Link>
+
         <div className="dropdown-menu">
           <FaUser size={25} className="hover:text-primary " />
           <LogoutButton />

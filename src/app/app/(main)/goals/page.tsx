@@ -1,3 +1,5 @@
+import { AddGoal } from "@/components/add-goal";
+import { Goals } from "@/components/goals";
 import { getGoals, getUid } from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/server";
 import { FaPlus } from "react-icons/fa";
@@ -17,10 +19,9 @@ export default async function Page() {
         melhorar{" "}
       </p>
       <div className="flex">
-        <h2 className="flex gap-1 items-center text-xs">
-          Criar meta <FaPlus />
-        </h2>
+        <AddGoal />
       </div>
+      <Goals />
     </div>
   );
 }

@@ -1,13 +1,15 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const BR$Input = ({
   name,
+  defaultValue,
   register,
   registerName,
   className = "",
 }: {
   name: string;
+  defaultValue?: number;
   registerName: string;
   className?: string;
   register: any;
@@ -50,6 +52,12 @@ export const BR$Input = ({
     console.log(inputValue);
   };
 
+  useEffect(() => {
+    if (defaultValue) {
+      normalizeBR$(String(defaultValue.toFixed(2)));
+    }
+  }, []);
+
   return (
     <input
       name={name}
@@ -65,15 +73,4 @@ export const BR$Input = ({
       }}
     />
   );
-
-  // return (
-  //   <NumericFormat
-  //     value={value}
-  //     onChange={(e) => setValue(e.target.value)}
-  //     thousandSeparator="."
-  //     decimalSeparator=","
-  //     decimalScale={2}
-  //     allowedDecimalSeparators={[","]}
-  //   />
-  // );
 };

@@ -5,10 +5,23 @@ import { useState } from "react";
 import { CloseButton } from "./close-button";
 import { cn } from "@/lib/utils";
 import { dateToBRStringDate } from "@/lib/timefns";
+import { EditControlForm } from "./control-form";
+import { getUid, resetControl } from "@/lib/supabase-utils";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
-export const ControlDetails = ({ control }: { control: controlType }) => {
+export const ControlDetails = ({
+  control,
+  uid,
+}: {
+  control: controlType;
+  uid: string | undefined;
+}) => {
   const [isOpen, setOpen] = useState(false);
-
+  const [isEditOpen, setEditOpen] = useState(false);
+  const [isResetOpen, setOpenReset] = useState(false);
+  const supabase = createClient();
+  const router = useRouter();
   const handleOpen = () => {
     setOpen(true);
   };
@@ -16,7 +29,30 @@ export const ControlDetails = ({ control }: { control: controlType }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(control.spentValue > control.controlValue);
+
+  const handleOpenReset = () => {
+    setOpenReset(true);
+  };
+  const handleCloseReset = () => {
+    setOpenReset(false);
+  };
+
+  const handleOpenEdit = () => {
+    setOpen(false);
+    setEditOpen(true);
+  };
+  const handleCloseEdit = () => {
+    setEditOpen(false);
+    setOpen(true);
+  };
+
+  async function handleResetControl() {
+    await resetControl(supabase, uid, control);
+    handleCloseReset();
+    handleClose();
+    router.refresh();
+  }
+
   const getBarWidth = (spentValue: number, controlValue: number) => {
     return (spentValue / controlValue) * 100 > 100
       ? 100
@@ -24,11 +60,11 @@ export const ControlDetails = ({ control }: { control: controlType }) => {
   };
 
   const barWidth = getBarWidth(control.spentValue, control.controlValue);
-
+  const isOver = control.spentValue > control.controlValue;
   return (
     <div>
       <p className="text-sm hover:cursor-pointer" onClick={handleOpen}>
-        Editar
+        Ver sobre
       </p>
 
       {isOpen && (
@@ -60,9 +96,7 @@ export const ControlDetails = ({ control }: { control: controlType }) => {
                       }}
                       className={cn(
                         "rounded-lg h-5",
-                        control.spentValue > control.controlValue
-                          ? "bg-red-500"
-                          : "bg-green-500"
+                        isOver ? "bg-red-500" : "bg-green-500"
                       )}
                     ></div>
                   </div>
@@ -75,15 +109,59 @@ export const ControlDetails = ({ control }: { control: controlType }) => {
             </div>
 
             <div className="px-2">
-              <p>Você está dentro do seu controle, parabéns!</p>
+              <p>
+                {isOver
+                  ? "Você ultrapassou seu controle :( "
+                  : " Você está dentro do seu controle, parabéns!"}
+              </p>
               <p>
                 Ele irá manter contagem até dia{" "}
                 <b>{dateToBRStringDate(control.until)}</b>
               </p>
             </div>
+            <button
+              onClick={handleOpenEdit}
+              className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
+            >
+              Editar controle
+            </button>
+            <button
+              onClick={handleOpenReset}
+              className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
+            >
+              Resetar contagem
+            </button>
+          </div>
+        </div>
+      )}
+      {isEditOpen && (
+        <div className="z-20 bg-black/60 inset-0 flex absolute justify-center items-center">
+          <div className="w-[320px] bg-light-bg  rounded-lg text-dark-text space-y-6">
+            <EditControlForm
+              control={control}
+              handleCloseEdit={handleCloseEdit}
+            />
+          </div>
+        </div>
+      )}
+
+      {isResetOpen && (
+        <div className="z-20 bg-black/60 inset-0 flex absolute justify-center items-center text-dark-text">
+          <div className="w-[320px] bg-light-bg px-5">
+            <p>Você deseja resetar a contagem do seu Controle?</p>
             <div className="flex gap-5">
-              <button>Adicionar um gasto a esse controle </button>
-              <button>Editar</button>
+              <button
+                className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
+                onClick={handleResetControl}
+              >
+                Sim
+              </button>
+              <button
+                className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
+                onClick={handleCloseReset}
+              >
+                Não
+              </button>
             </div>
           </div>
         </div>
