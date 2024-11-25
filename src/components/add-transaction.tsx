@@ -69,6 +69,7 @@ export function AddTransaction({
       setIsDebt(false);
     }
   };
+
   console.log(categories);
   return (
     <div

@@ -20,7 +20,7 @@ export const ProgrammedStatement = ({
     setOpen(true);
   };
   return (
-    <div className="bg-primary w-[40rem] h-[40rem] px-5 py-2 rounded-md">
+    <div className="md:w-[50rem] w-full my-4 h-[40rem] border border-primary bg-primary space-y-5 px-5 py-5 rounded-lg ">
       <div className="flex justify-end my-6">
         <div className="relative w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition   after:duration-300 after:origin-left text-light-text items-center text-xl ">
           <div

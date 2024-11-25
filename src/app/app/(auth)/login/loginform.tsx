@@ -1,10 +1,13 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -15,7 +18,7 @@ const loginSchema = z.object({
 export const LoginForm = () => {
   const supabase = createClient();
   const router = useRouter();
-
+  const [hasError, setHasError] = useState(false);
   const {
     handleSubmit,
     register,
@@ -30,11 +33,12 @@ export const LoginForm = () => {
       password: FormData.password,
     });
     if (data) {
-      console.log(data);
+      toast.success("Login com sucesso");
       router.push("/app/home");
     }
     if (error) {
-      console.log(error);
+      toast.error("Email ou senha errados");
+      setHasError(true);
       return;
     }
   };
@@ -52,7 +56,10 @@ export const LoginForm = () => {
           {...register("email")}
           type="text"
           name="email"
-          className="outline outline-1 outline-black text-lg text-dark-text px-1"
+          className={cn(
+            "outline outline-1 outline-black text-lg text-dark-text px-1",
+            hasError ? "outline-red-500" : ""
+          )}
         />
         {errors.email && <p> {`${errors.email?.message}`}</p>}
       </div>
@@ -66,7 +73,10 @@ export const LoginForm = () => {
             minLength: { value: 1, message: "Senha não pode estar vazia" },
           })}
           name="password"
-          className="outline outline-1 outline-black text-lg text-dark-text px-1"
+          className={cn(
+            "outline outline-1 outline-black text-lg text-dark-text px-1",
+            hasError ? "outline-red-500" : ""
+          )}
         />
         {errors.password && <p> {`${errors.password.message}`}</p>}
       </div>

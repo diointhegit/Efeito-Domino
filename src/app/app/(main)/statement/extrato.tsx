@@ -45,17 +45,8 @@ export const ExtratoCard = ({
       id="hide_scrollbar"
       className="md:w-[50rem] w-full my-4 h-[40rem] border border-primary bg-primary space-y-5 px-5 py-5 rounded-lg overflow-y-scroll"
     >
-      {/* <div className="flex text-xl cursor-pointer justify-end px-2 text-light-text gap-3 items-center "> */}
       <div className="flex justify-end">
-        <div className="relative w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition   after:duration-300 after:origin-left text-light-text items-center text-xl ">
-          {/* <div
-            className="flex gap-2 items-center cursor-pointer w-full justify-end"
-            onClick={openAddTransaction}
-          >
-            Adicionar transação
-            <BiPlus aria-label="ícone de Mais" size={30} />
-          </div> */}
-        </div>
+        <div className="relative w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition   after:duration-300 after:origin-left text-light-text items-center text-xl "></div>
       </div>
 
       {statement &&

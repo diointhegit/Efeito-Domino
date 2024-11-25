@@ -1,3 +1,5 @@
+import { Toaster } from "react-hot-toast";
+
 export default async function Layout({
   children,
 }: Readonly<{
@@ -6,6 +8,7 @@ export default async function Layout({
   return (
     <main className=" bg-light-bg flex items-center justify-center w-screen h-screen ">
       {children}
+      <Toaster />
     </main>
   );
 }

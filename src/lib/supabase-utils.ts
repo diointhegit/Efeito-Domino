@@ -318,7 +318,7 @@ export const getCategories = async (
   uid: string | undefined
 ) => {
   const controls = await getControls(supabase, uid);
-  let categories = Array(controls).map((category: any) => {
+  let categories = controls.map((category: any) => {
     return { name: category.name, id: category.id, value: category.spentValue };
   });
   return categories;
