@@ -31,7 +31,7 @@ export const AddGoal = () => {
   const today = new Date().toISOString().slice(0, 10);
   const router = useRouter();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     const uid = await getUid(supabase);
     data.user_id = uid;
     await createGoal(supabase, data);
