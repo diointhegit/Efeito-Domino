@@ -2,7 +2,9 @@ import { ControlDetails } from "@/components/control-details";
 import { getControls } from "@/lib/supabase-utils";
 import { controlType } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { getSupabase } from "@/server-actions/transaction-actions";
+import { createClient } from "@/utils/supabase/server";
+
+const supabase = createClient();
 
 type displayTypes = "flex" | "scroll";
 export const Controls = async ({
@@ -10,7 +12,6 @@ export const Controls = async ({
 }: {
   displayType?: displayTypes;
 }) => {
-  const supabase = await getSupabase();
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
   const controls = (await getControls(supabase, uid)) as any[];

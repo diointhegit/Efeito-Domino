@@ -1,12 +1,11 @@
 import { MoreDetails } from "@/components/more-details";
 import { getProgrammed, getUid } from "@/lib/supabase-utils";
 import { dateToBRStringDate, ISOToBRStringDate } from "@/lib/timefns";
+import { createClient } from "@/utils/supabase/server";
 import { ProgrammedStatement } from "./programmed";
-import { getSupabase } from "@/server-actions/transaction-actions";
 
 export default async function Page() {
-  const supabase = await getSupabase();
-
+  const supabase = createClient();
   const uid = await getUid(supabase);
 
   const programmed = await getProgrammed(supabase, uid);
