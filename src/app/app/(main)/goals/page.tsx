@@ -8,7 +8,6 @@ export default async function Page() {
   const supabase = createClient();
   const uid = await getUid(supabase);
   const goals = await getGoals(supabase, uid);
-  console.log(goals);
   return (
     <div className="px-5 flex flex-col items-center text-left md:block md:px-20">
       <div className="flex">

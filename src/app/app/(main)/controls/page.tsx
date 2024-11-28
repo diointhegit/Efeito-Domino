@@ -1,6 +1,5 @@
 import { AddControl } from "@/components/add-control";
 import { Controls } from "@/components/controls";
-import { BiPlus } from "react-icons/bi";
 
 export default async function Page() {
   return (

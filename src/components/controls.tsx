@@ -4,14 +4,14 @@ import { controlType } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 
-const supabase = createClient();
-
 type displayTypes = "flex" | "scroll";
 export const Controls = async ({
   displayType,
 }: {
   displayType?: displayTypes;
 }) => {
+  const supabase = createClient();
+
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
   const controls = (await getControls(supabase, uid)) as any[];
