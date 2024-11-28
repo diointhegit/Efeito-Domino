@@ -291,13 +291,13 @@ export const reprogramProgrammed = async (
   if (futureTime == "month") {
     transaction.date = addMonths(transaction.date, 1);
     await addProgrammedTransaction(supabase, uid as string, transaction);
-    await deleteProgrammed(supabase, transaction.id);
+    await deleteProgrammed(supabase, transaction.id as number);
     return;
   }
 
   transaction.date = addDays(new Date(), Number(futureTime));
   await addProgrammedTransaction(supabase, uid as string, transaction);
-  await deleteProgrammed(supabase, transaction.id);
+  await deleteProgrammed(supabase, transaction.id as number);
 
   return;
 };
@@ -320,7 +320,7 @@ export const getCategories = async (
   supabase: SupabaseClient,
   uid: string | undefined
 ) => {
-  const controls = await getControls(supabase, uid);
+  const controls = (await getControls(supabase, uid)) as [];
   let categories = controls.map((category: any) => {
     return { name: category.name, id: category.id, value: category.spentValue };
   });

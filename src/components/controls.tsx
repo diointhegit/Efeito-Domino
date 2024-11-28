@@ -73,7 +73,7 @@ export const ControlCard = ({
           )}
         >
           {balance >= 0
-            ? "Você tem ainda disponível "
+            ? "Você ainda pode gastar "
             : "Você já ultrapassou seu limite em "}
           R${" "}
           {String(
