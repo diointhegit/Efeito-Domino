@@ -4,26 +4,14 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { LoginForm } from "./loginform";
+import { getSupabase } from "@/server-actions/transaction-actions";
 
 export default async function Page() {
   async function handleLogin(fd: FormData) {
     "use server";
 
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //   email: fd.get("email") as string,
-    //   password: fd.get("password") as string,
-    // });
-    // if (error) {
-    //   redirect("/error");
-    // }
-    // console.log(data);
-    // revalidatePath("/", "layout");
-    // redirect("/login");
+    const supabase = await getSupabase();
 
-    const supabase = createClient();
-
-    // type-casting here for convenience
-    // in practice, you should validate your inputs
     const data = {
       email: fd.get("email") as string,
       password: fd.get("password") as string,
