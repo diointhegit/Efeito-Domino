@@ -50,19 +50,12 @@ export function AddTransaction({
       const balance = await getBalance(supabase, uid);
       await updateBalance(supabase, balance, data.value, data.type, uid);
 
-      console.log(
-        await addToControl(
-          supabase,
-          data.value,
-          data.categoryId,
-          data.categoryValue
-        )
-      );
+      console.log(await addToControl(supabase, data.value, data.categoryId));
       router.refresh();
       close();
     }
   };
-  const checkDebt = (e) => {
+  const checkDebt = (e: any) => {
     if (e.target.value == "debt") {
       setIsDebt(true);
     } else {
