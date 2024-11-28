@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function Page() {
+  redirect("/app/home");
   return (
     <div className="h-screen">
       {" "}

@@ -187,7 +187,6 @@ export const deleteProgrammed = async (
     .delete()
     .eq("id", transactionId);
 
-  console.log(response);
   return response;
 };
 
@@ -279,6 +278,7 @@ export const resetControl = async (
 
 export const supabaseLogOut = async (supabase: SupabaseClient) => {
   const { error } = await supabase.auth.signOut();
+  if (error) return error;
 };
 
 export const reprogramProgrammed = async (
@@ -291,11 +291,14 @@ export const reprogramProgrammed = async (
   if (futureTime == "month") {
     transaction.date = addMonths(transaction.date, 1);
     await addProgrammedTransaction(supabase, uid as string, transaction);
+    await deleteProgrammed(supabase, transaction.id);
     return;
   }
 
   transaction.date = addDays(new Date(), Number(futureTime));
   await addProgrammedTransaction(supabase, uid as string, transaction);
+  await deleteProgrammed(supabase, transaction.id);
+
   return;
 };
 

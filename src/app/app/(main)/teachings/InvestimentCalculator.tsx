@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import React, { useState } from 'react';
-import { NumericFormat } from 'react-number-format';
-require('./style.css');
+import React, { useState } from "react";
+import { NumericFormat } from "react-number-format";
+require("./style.css");
 
 const InvestmentCalculator = () => {
   const [investmentType, setInvestmentType] = useState("CDB");
@@ -21,30 +21,38 @@ const InvestmentCalculator = () => {
     return 15.0;
   };
 
-  const calculateSavingsComparison = (meses: number, valorInicial:number, valorMensal:number) => {
+  const calculateSavingsComparison = (
+    meses: number,
+    valorInicial: number,
+    valorMensal: number
+  ) => {
     const taxaAnual = 0.06; // 6% ao ano
     const taxaMensal = taxaAnual / 12;
-    
+
     let saldo = valorInicial;
     let rendimentoTotal = 0;
 
     for (let mes = 1; mes <= meses; mes++) {
-        // Calcula o rendimento mensal
-        const rendimentoMes = saldo * taxaMensal;
-        saldo += rendimentoMes + valorMensal; // Adiciona o rendimento e o valor mensal
+      // Calcula o rendimento mensal
+      const rendimentoMes = saldo * taxaMensal;
+      saldo += rendimentoMes + valorMensal; // Adiciona o rendimento e o valor mensal
 
-        rendimentoTotal += rendimentoMes; // Acumula o rendimento total
+      rendimentoTotal += rendimentoMes; // Acumula o rendimento total
     }
 
-    return saldo
+    return saldo;
   };
-  
 
   const calculateInvestment = () => {
     const termInMonths = termType === "Anos" ? term * 12 : term;
-    const totalInvestment = applicationAmount + monthlyInvestment * termInMonths;
+    const totalInvestment =
+      applicationAmount + monthlyInvestment * termInMonths;
     let grossEarnings, netEarnings;
-    const poupanca:number = calculateSavingsComparison(termInMonths, applicationAmount, monthlyInvestment)
+    const poupanca: number = calculateSavingsComparison(
+      termInMonths,
+      applicationAmount,
+      monthlyInvestment
+    );
 
     if (investmentType === "LCI e LCA") {
       const lciRate = calculateLCIRate(termInMonths);
@@ -52,33 +60,46 @@ const InvestmentCalculator = () => {
       netEarnings = grossEarnings; // No tax for LCI/LCA
     } else if (investmentType === "CDB") {
       const cdbRate = CDI_BASE_RATE * (rate / 100); // Apply the CDI percentage rate
-      const irTaxRate = termInMonths <= 6 ? 22.5 : termInMonths <= 12 ? 20.0 : termInMonths <= 24 ? 17.5 : 15.0;
+      const irTaxRate =
+        termInMonths <= 6
+          ? 22.5
+          : termInMonths <= 12
+            ? 20.0
+            : termInMonths <= 24
+              ? 17.5
+              : 15.0;
       grossEarnings = (totalInvestment * (cdbRate / 100) * termInMonths) / 12;
       netEarnings = grossEarnings - (grossEarnings * irTaxRate) / 100;
     }
 
-    console.log(poupanca)
+    console.log(poupanca);
 
     return {
       totalInvestment,
       grossEarnings,
       netEarnings,
-      totalWithEarnings: totalInvestment + (netEarnings || 0.00),
+      totalWithEarnings: totalInvestment + (netEarnings || 0.0),
       savingsComparison: poupanca,
     };
   };
 
-  const { totalInvestment, grossEarnings, netEarnings, totalWithEarnings, savingsComparison } = calculateInvestment();
+  const {
+    totalInvestment,
+    grossEarnings,
+    netEarnings,
+    totalWithEarnings,
+    savingsComparison,
+  } = calculateInvestment();
 
   return (
     <div className="investment-calculator">
       <div className="input-section">
         <div className="asset-type">
           <h3>Tipo de ativo</h3>
-          {["CDB", "LCI e LCA"].map(type => (
+          {["CDB", "LCI e LCA"].map((type) => (
             <button
               key={type}
-              className={`asset-button ${investmentType === type ? 'selected' : ''}`}
+              className={`asset-button ${investmentType === type ? "selected" : ""}`}
               onClick={() => setInvestmentType(type)}
             >
               {type}
@@ -93,7 +114,9 @@ const InvestmentCalculator = () => {
             decimalSeparator=","
             prefix="R$ "
             placeholder="R$ 0,00"
-            onValueChange={(values) => setApplicationAmount(values.floatValue || 0)}
+            onValueChange={(values) =>
+              setApplicationAmount(values.floatValue || 0)
+            }
           />
         </div>
         <div className="input-group">
@@ -104,18 +127,24 @@ const InvestmentCalculator = () => {
             decimalSeparator=","
             prefix="R$ "
             placeholder="R$ 0,00"
-            onValueChange={(values) => setMonthlyInvestment(values.floatValue || 0)}
+            onValueChange={(values) =>
+              setMonthlyInvestment(values.floatValue || 0)
+            }
           />
         </div>
         <div className="input-group">
           <label>Prazo</label>
-          <div className="term-input">
+          <div className="flex gap-2">
             <input
               type="number"
               value={term}
               onChange={(e) => setTerm(Number(e.target.value))}
             />
-            <select value={termType} onChange={(e) => setTermType(e.target.value)}>
+
+            <select
+              value={termType}
+              onChange={(e) => setTermType(e.target.value)}
+            >
               <option value="Meses">Meses</option>
               <option value="Anos">Anos</option>
             </select>
@@ -132,16 +161,27 @@ const InvestmentCalculator = () => {
         </div>
       </div>
       <div className="result-section">
-        <h3>Em {term} {termType} você teria:</h3>
+        <h3>
+          Em {term} {termType} você teria:
+        </h3>
         <h1>R$ {totalWithEarnings.toFixed(2)}</h1>
         <p>Valor total com rendimento líquido</p>
         <ul>
           <li>Total investido: R$ {totalInvestment.toFixed(2)}</li>
-          <li>Rendimento bruto: R$ {grossEarnings ? grossEarnings.toFixed(2) : "0.00"}</li>
-          <li>Rendimento líquido: R$ {netEarnings ? netEarnings.toFixed(2) : "0.00"}</li>
+          <li>
+            Rendimento bruto: R${" "}
+            {grossEarnings ? grossEarnings.toFixed(2) : "0.00"}
+          </li>
+          <li>
+            Rendimento líquido: R${" "}
+            {netEarnings ? netEarnings.toFixed(2) : "0.00"}
+          </li>
           <li>Na poupança: R$ {savingsComparison.toFixed(2)}</li>
         </ul>
-        <p className="disclaimer">Taxa da Poupança em 0.57% a.m., referente a 2024-11-04. Esses valores são uma simulação e não são uma garantia de rentabilidade futura.</p>
+        <p className="disclaimer">
+          Taxa da Poupança em 0.57% a.m., referente a 2024-11-04. Esses valores
+          são uma simulação e não são uma garantia de rentabilidade futura.
+        </p>
       </div>
     </div>
   );

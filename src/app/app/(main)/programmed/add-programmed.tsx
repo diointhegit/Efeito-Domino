@@ -45,9 +45,9 @@ export const AddProgrammedTransaction = ({
   return (
     <div
       id="programmedId"
-      className="flex inset-0 h-screen w-screen absolute bg-black/40 justify-center items-center"
+      className="flex inset-0 absolute bg-black/60 justify-center items-center px-5"
     >
-      <div className="bg-white w-[40rem] ">
+      <div className="bg-white md:w-[40rem] rounded-md">
         <div className="flex items-center justify-between px-14 py-3">
           <p className="text-2xl">Programe uma transação</p>
           <CloseButton close={close} size={20} containerId="programmedId" />

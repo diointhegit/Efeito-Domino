@@ -72,7 +72,7 @@ export const ControlDetails = ({
           id="controlDetails"
           className="inset-0 absolute flex items-center justify-center bg-black/50"
         >
-          <div className="bg-light-bg text-dark-text rounded-lg px-5 py-2 w-[32rem]">
+          <div className="bg-light-bg text-dark-text rounded-lg px-5 py-2 md:w-[32rem] w-[22rem]">
             <div className="flex justify-end h-6">
               <CloseButton
                 close={handleClose}
@@ -81,15 +81,15 @@ export const ControlDetails = ({
               />
             </div>
             <div className="flex items-center justify-center ">
-              <div className="">
+              <div className="w-full md:w-auto">
                 <div className="grid grid-cols-5 items-center">
                   <p className="col-span-3 text-lg ">{control.name}</p>
-                  <p className="col-span-2 font-bold text-lg">
+                  <p className="col-span-2 font-bold text-lg ">
                     R$ {String(control.spentValue.toFixed(2).replace(".", ","))}
                   </p>
                 </div>
                 <div className="flex gap-2 items-center ">
-                  <div className="h-5 w-[20rem] rounded-lg outline-1 outline">
+                  <div className="h-5 md:w-[20rem] w-full  rounded-lg outline-1 outline">
                     <div
                       style={{
                         width: `${barWidth}%`,
@@ -119,18 +119,20 @@ export const ControlDetails = ({
                 <b>{dateToBRStringDate(control.until)}</b>
               </p>
             </div>
-            <button
-              onClick={handleOpenEdit}
-              className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
-            >
-              Editar controle
-            </button>
-            <button
-              onClick={handleOpenReset}
-              className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
-            >
-              Resetar contagem
-            </button>
+            <div className="flex">
+              <button
+                onClick={handleOpenEdit}
+                className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
+              >
+                Editar controle
+              </button>
+              <button
+                onClick={handleOpenReset}
+                className="px-2 outline outline-1 outline-black rounded-md my-3 mx-2"
+              >
+                Resetar contagem
+              </button>
+            </div>
           </div>
         </div>
       )}

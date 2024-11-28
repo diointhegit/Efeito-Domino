@@ -38,9 +38,19 @@ const config: Config = {
           opacity: 1,
         },
       },
+      "slide-in-right": {
+        "0%": {
+          visibility: "visible",
+          transform: "translate3d(100%, 0, 0)",
+        },
+        "100%": {
+          transform: "translate3d(0, 0, 0)",
+        },
+      },
       animation: {
         slideinleft: "slide-in-left 1s ease-in-out 0.25s 1 ",
         fadein: "fade-in 1s ease-in-out 0.25s 1",
+        slideinright: "slide-in-right 1s ease-in-out 0.25s 1",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

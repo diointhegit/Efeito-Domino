@@ -15,7 +15,7 @@ export const Goals = async () => {
   return (
     <div>
       {goals.length > 0 ? (
-        <div className="flex gap-10">
+        <div className="md:flex gap-10 grid">
           {goals.map((goal: any) => {
             return <GoalCard goal={goal} key={goal.id} balance={balance} />;
           })}

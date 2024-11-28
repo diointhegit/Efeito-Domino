@@ -1,6 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { MainHeader, SecondHeader } from "./saldo";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaAngleRight, FaInfoCircle } from "react-icons/fa";
 import { Controls } from "@/components/controls";
 import { AddProgrammedTransaction } from "../programmed/add-programmed";
 import { AddTransaction } from "@/components/add-transaction";
@@ -19,6 +19,7 @@ import {
   isWithinInterval,
 } from "date-fns";
 import { programmedTransactionType } from "@/lib/schemas";
+import { HomeHeader } from "@/components/home-header";
 
 export default async function Page() {
   const supabase = createClient();
@@ -85,11 +86,7 @@ export default async function Page() {
   const monthBalance = user?.balance + programmedValues;
   return (
     <div className="">
-      <div className="px-12 py-5 bg-primary text-light-text flex gap-10">
-        <MainHeader name={user?.name} balance={user?.balance} />
-        <div className="min-h-[100px] w-0.5 bg-white"></div>
-        <SecondHeader monthBalance={monthBalance} />
-      </div>
+      <HomeHeader monthBalance={monthBalance} user={user} />
 
       <div className="p-5 ">
         <p className="text-2xl">Atalhos:</p>

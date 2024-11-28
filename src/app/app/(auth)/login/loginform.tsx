@@ -32,14 +32,14 @@ export const LoginForm = () => {
       email: FormData.email,
       password: FormData.password,
     });
-    if (data) {
-      toast.success("Login com sucesso");
-      router.push("/app/home");
-    }
+
     if (error) {
       toast.error("Email ou senha errados");
       setHasError(true);
       return;
+    } else {
+      toast.success("Login com sucesso");
+      router.push("/app/home");
     }
   };
 

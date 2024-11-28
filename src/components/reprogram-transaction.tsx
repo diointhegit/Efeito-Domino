@@ -6,7 +6,11 @@ import {
   transactionSchema,
   TransactionSchema,
 } from "@/lib/schemas";
-import { reprogramProgrammed } from "@/lib/supabase-utils";
+import {
+  addTransaction,
+  deleteProgrammed,
+  reprogramProgrammed,
+} from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -40,6 +44,12 @@ export const ReprogramTransaction = ({
     closeReschedule();
   };
 
+  const handleOnlyRecieve = async () => {
+    await deleteProgrammed(supabase, transaction.id);
+    await addTransaction(supabase, uid, transaction);
+    router.refresh();
+    closeReschedule();
+  };
   return (
     <form
       action=""
@@ -67,7 +77,7 @@ export const ReprogramTransaction = ({
         </select>
       </div>
       <div className="flex justify-around">
-        <button onClick={() => console.log("oi")}>
+        <button type="button" onClick={handleOnlyRecieve}>
           Não, só receber mesmo!
         </button>
         <button type="submit">Vamos reprogramar!</button>

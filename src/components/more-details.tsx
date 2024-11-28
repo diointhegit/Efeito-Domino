@@ -41,6 +41,14 @@ export const MoreDetails = ({
     handleClose();
     handleOpenReschedule();
   };
+  const handleCancelProgrammed = async () => {
+    console.log(transaction.id);
+
+    await deleteProgrammed(supabase, transaction.id);
+    handleClose();
+    router.refresh();
+  };
+
   return (
     <div className={cn(className)}>
       <OpenButton open={handleOpen} />
@@ -61,7 +69,10 @@ export const MoreDetails = ({
             </div>
 
             <div className="flex gap-5 px-1 justify-center">
-              <button className="border border-1 border-black px-5 py-2">
+              <button
+                onClick={handleCancelProgrammed}
+                className="border border-1 border-black px-5 py-2"
+              >
                 Cancelar transação
               </button>
               <button

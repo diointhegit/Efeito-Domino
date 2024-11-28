@@ -20,16 +20,13 @@ export const ProgrammedStatement = ({
     setOpen(true);
   };
   return (
-    <div className="md:w-[50rem] w-full my-4 h-[40rem] border border-primary bg-primary space-y-5 px-5 py-5 rounded-lg ">
+    <div className="md:w-[50rem]   my-4 h-[40rem] border border-primary bg-primary px-5 py-5 rounded-lg ">
       <div className="flex justify-end my-6">
-        <div className="relative w-fit  after:block after:content-[''] after:absolute after:h-[3px] after:bg-white after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition   after:duration-300 after:origin-left text-light-text items-center text-xl ">
-          <div
-            className="flex gap-2 items-center cursor-pointer w-full justify-end"
-            onClick={handleOpen}
-          >
-            Adicionar programação
-            <BiPlus aria-label="ícone de Mais" size={30} />
-          </div>
+        <div
+          className="text-2xl text-light-text hover:cursor-pointer hover:text-neutral-400"
+          onClick={handleOpen}
+        >
+          Adicionar
         </div>
       </div>
       <div className="space-y-2">

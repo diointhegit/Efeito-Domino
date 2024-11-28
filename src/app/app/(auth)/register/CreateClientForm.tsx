@@ -17,7 +17,9 @@ const userSchema = z
     birthdate: z.string().min(10, "Data de nascimento inválida"),
     email: z.string().email("Email inválido"),
     password: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
-    passwordConfirm: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
+    passwordConfirm: z.string({
+      required_error: "Você precisa confirmar a senha",
+    }),
   })
   .superRefine(({ passwordConfirm, password, birthdate }, ctx) => {
     if (passwordConfirm !== password) {
@@ -80,7 +82,7 @@ export const CreateUserForm = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(userSchema),
   });
@@ -192,8 +194,9 @@ export const CreateUserForm = () => {
         {errors.passwordConfirm && <p>{`${errors.passwordConfirm.message}`}</p>}
       </div>
       <button
+        disabled={isSubmitting}
         type="submit"
-        className="border-light-bg border-2 hover:bg-light-bg hover:outline text-light-text grid place-items-center hover:text-dark-text outline-1 px-5 text-center h-12 transition-all ease-in-out"
+        className="border-light-bg border-2 hover:bg-light-bg hover:outline text-light-text grid place-items-center hover:text-dark-text outline-1 px-5 text-center h-12 transition-all ease-in-out disabled:bg-black"
       >
         Criar uma conta
       </button>
