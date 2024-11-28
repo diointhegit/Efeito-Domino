@@ -2,7 +2,7 @@ import React from "react";
 import InvestimentCalculator from "./InvestimentCalculator";
 require("./style.css");
 
-export const Page = () => {
+export default function Page() {
   return (
     <div className="bg-light-bg">
       <div className="financial-page container mx-auto py-10 px-5">
@@ -116,6 +116,4 @@ export const Page = () => {
       </div>
     </div>
   );
-};
-
-export default Page;
+}
