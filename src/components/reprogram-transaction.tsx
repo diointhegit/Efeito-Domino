@@ -45,7 +45,7 @@ export const ReprogramTransaction = ({
   };
 
   const handleOnlyRecieve = async () => {
-    await deleteProgrammed(supabase, transaction.id);
+    await deleteProgrammed(supabase, transaction.id as number);
     await addTransaction(supabase, uid, transaction);
     router.refresh();
     closeReschedule();
