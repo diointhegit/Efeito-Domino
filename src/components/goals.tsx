@@ -4,9 +4,8 @@ import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 import { SaveToGoals } from "./add-to-goals";
 
-const supabase = createClient();
-
 export const Goals = async () => {
+  const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;
   const goals = (await getGoals(supabase, uid)) as [];

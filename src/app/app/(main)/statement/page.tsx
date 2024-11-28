@@ -1,11 +1,11 @@
 import { transactionType } from "@/lib/types";
-import { createClient } from "@/utils/supabase/server";
 import { Extrato } from "./extrato";
 import { BiChevronRight, BiPlus } from "react-icons/bi";
 import { AddTransaction } from "@/components/add-transaction";
+import { getSupabase } from "@/server-actions/transaction-actions";
 
 export default async function Page() {
-  const supabase = createClient();
+  const supabase = await getSupabase();
 
   const { data, error } = await supabase.auth.getUser();
   let uid = data.user?.id;

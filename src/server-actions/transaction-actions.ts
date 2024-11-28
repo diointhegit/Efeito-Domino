@@ -1,6 +1,7 @@
 "use server";
 
 import { transactionSchema, TransactionSchema } from "@/lib/schemas";
+import { createClient } from "@/utils/supabase/server";
 import { z } from "zod";
 
 export const transformZodErrors = (error: z.ZodError) => {
@@ -47,4 +48,9 @@ export async function submitTransaction(formData: FormData) {
       data: null,
     };
   }
+}
+
+export async function getSupabase() {
+  const supabase = createClient();
+  return supabase;
 }
