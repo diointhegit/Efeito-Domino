@@ -1,5 +1,6 @@
 "use client";
 
+import { InputErrorMessage } from "@/components/texts/error-text";
 import { dateToBRStringDate } from "@/lib/timefns";
 import { containsSequentialNumbers } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
@@ -142,7 +143,7 @@ export const CreateUserForm = () => {
           name="name"
           className="outline outline-1 outline-black text-lg text-dark-text px-1"
         />
-        {errors.name && <p>{`${errors.name.message}`}</p>}
+        {errors.name && <InputErrorMessage message={errors.name.message} />}
       </div>
       <div className="grid">
         <label htmlFor="birthdate" className="text-xl">
@@ -155,7 +156,9 @@ export const CreateUserForm = () => {
           className="outline outline-1 outline-black text-lg text-dark-text px-1"
         />
 
-        {errors.birthdate && <p>{`${errors.birthdate.message}`}</p>}
+        {errors.birthdate && (
+          <InputErrorMessage message={errors.birthdate.message} />
+        )}
       </div>
       <div className="grid">
         <label htmlFor="email" className="text-xl">
@@ -167,7 +170,7 @@ export const CreateUserForm = () => {
           name="email"
           className="outline outline-1 outline-black text-lg text-dark-text px-1"
         />
-        {errors.email && <p>{`${errors.email.message}`}</p>}
+        {errors.email && <InputErrorMessage message={errors.email.message} />}
       </div>
       <div className="grid">
         <label htmlFor="password" className="text-xl">
@@ -179,7 +182,9 @@ export const CreateUserForm = () => {
           name="password"
           className="outline outline-1 outline-black text-lg text-dark-text px-1"
         />
-        {errors.password && <p>{`${errors.password.message}`}</p>}
+        {errors.password && (
+          <InputErrorMessage message={errors.password.message} />
+        )}
       </div>{" "}
       <div className="grid ">
         <label htmlFor="passwordConfirm" className="text-xl">
@@ -191,14 +196,16 @@ export const CreateUserForm = () => {
           name="passwordConfirm"
           className="outline outline-1 outline-black text-lg text-dark-text px-1 "
         />
-        {errors.passwordConfirm && <p>{`${errors.passwordConfirm.message}`}</p>}
+        {errors.passwordConfirm && (
+          <InputErrorMessage message={errors.passwordConfirm.message} />
+        )}
       </div>
       <button
         disabled={isSubmitting}
         type="submit"
         className="border-light-bg border-2 hover:bg-light-bg hover:outline text-light-text grid place-items-center hover:text-dark-text outline-1 px-5 text-center h-12 transition-all ease-in-out disabled:bg-black"
       >
-        Criar uma conta
+        {isSubmitting ? "Criando conta..." : "Entrar"}
       </button>
     </form>
   );

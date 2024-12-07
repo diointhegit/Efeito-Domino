@@ -164,7 +164,7 @@ export const saveToGoalSchema = z
       .pipe(
         z.coerce
           .number()
-          .min(0.0001, { message: "O valor precisa ser maior que zero" })
+          .min(0.0, { message: "O valor precisa ser maior que zero" })
           .max(999999999)
       ),
     balance: z
@@ -180,7 +180,7 @@ export const saveToGoalSchema = z
       .pipe(
         z.coerce
           .number()
-          .min(0.0001, { message: "O valor precisa ser maior que zero" })
+          .min(0.0, { message: "O valor precisa ser maior que zero" })
           .max(999999999)
       ),
     goal_value: z
@@ -188,7 +188,7 @@ export const saveToGoalSchema = z
       .pipe(
         z.coerce
           .number()
-          .min(0.0001, { message: "O valor precisa ser maior que zero" })
+          .min(0.0, { message: "O valor precisa ser maior que zero" })
           .max(999999999)
       ),
   })

@@ -3,7 +3,7 @@ import { Controls } from "@/components/controls";
 
 export default async function Page() {
   return (
-    <div className="px-7 space-y-5">
+    <div className="px-20 space-y-5">
       <h1 className="text-3xl">Controles</h1>
       <h2 className="md:text-2xl">
         Quando você reconhece seus gastos, você consegue controlar eles melhor

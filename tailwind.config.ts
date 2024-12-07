@@ -61,6 +61,10 @@ const config: Config = {
         sans: ["Raleway"],
       },
     },
+    transitionProperty: {
+      width: "width",
+      height: "height",
+    },
   },
   plugins: [],
   darkMode: "class",

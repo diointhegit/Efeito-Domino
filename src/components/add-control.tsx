@@ -11,6 +11,7 @@ import { periodicities } from "@/lib/utils";
 import { createControl, getUid } from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { motion } from "motion/react";
 
 export const AddControl = () => {
   const {
@@ -53,7 +54,11 @@ export const AddControl = () => {
       </div>
       {isOpen && (
         <div className="inset-0 flex items-center justify-center absolute bg-black/75 transition-all duration-100 ">
-          <div className="w-[22rem] bg-light-bg  rounded-md">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-[22rem] bg-light-bg  rounded-md"
+          >
             <div className="p-5">
               <div className="px-2 flex justify-end">
                 <CloseButton close={handleClose} containerId="controlId" />
@@ -102,7 +107,7 @@ export const AddControl = () => {
                 </button>
               </form>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>

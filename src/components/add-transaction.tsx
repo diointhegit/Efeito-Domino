@@ -15,6 +15,8 @@ import {
 } from "@/lib/supabase-utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { motion } from "motion/react";
+
 export function AddTransaction({
   close,
   categories,
@@ -63,13 +65,16 @@ export function AddTransaction({
     }
   };
 
-  console.log(categories);
   return (
     <div
       id="addTransaction"
       className="inset-0 flex items-center justify-center absolute bg-black/75 transition-all duration-100 "
     >
-      <div className="w-[40rem] rounded-xl px-10 py-5 bg-white h-[30rem] ">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="w-[40rem] rounded-xl px-10 py-5 bg-white h-[30rem] "
+      >
         <div className="flex items-center justify-between px-14 py-3">
           <p className="text-2xl">Adicionar uma transação</p>
           <CloseButton close={close} size={20} containerId="addTransaction" />
@@ -127,15 +132,21 @@ export function AddTransaction({
             {errors.category && <p>{errors.category.message}</p>}
           </div>
           <div className="flex gap-5">
-            <button type="submit" className="border border-black px-5 py-2">
-              Adicionar transação{" "}
-            </button>
-            <button className="border border-black px-5 py-2" onClick={close}>
+            <button
+              className="border-2 px-5 py-2 rounded-md border-black hover:bg-blue-300 hover:border-1 shadow-sm ease-in-out duration-150"
+              onClick={close}
+            >
               Cancelar{" "}
+            </button>
+            <button
+              type="submit"
+              className="border-2 ease-in-out duration-150 bg-primary rounded-md text-light-text px-5 shadow-sm py-2 hover:bg-light-bg hover:text-primary hover:border-primary hover:border-2"
+            >
+              Adicionar transação{" "}
             </button>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 }

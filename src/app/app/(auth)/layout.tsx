@@ -8,8 +8,8 @@ export default async function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className=" bg-light-bg flex items-center justify-center w-screen h-screen ">
-      <div>
+    <main className=" bg-light-bg flex items-center justify-center w-screen min-h-screen py-20">
+      <div className="px-25">
         <Link href="/" className="flex justify-center my-2">
           <Image src="/game.svg" width={50} height={50} alt="3 dominos" />
         </Link>

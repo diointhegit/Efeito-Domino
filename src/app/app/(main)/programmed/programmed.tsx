@@ -4,6 +4,7 @@ import { dateToBRStringDate } from "@/lib/timefns";
 import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { AddProgrammedTransaction } from "./add-programmed";
+import { motion } from "motion/react";
 
 export const ProgrammedStatement = ({
   programmed,
@@ -20,7 +21,11 @@ export const ProgrammedStatement = ({
     setOpen(true);
   };
   return (
-    <div className="md:w-[50rem]   my-4 h-[40rem] border border-primary bg-primary px-5 py-5 rounded-lg ">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="md:w-[50rem]   my-4 h-[40rem] border border-primary bg-primary px-5 py-5 rounded-lg "
+    >
       <div className="flex justify-end my-6">
         <div
           className="text-2xl text-light-text hover:cursor-pointer hover:text-neutral-400"
@@ -46,6 +51,6 @@ export const ProgrammedStatement = ({
         })}
       </div>
       {isOpen && <AddProgrammedTransaction close={handleClose} uid={uid} />}
-    </div>
+    </motion.div>
   );
 };

@@ -2,7 +2,11 @@
 import { useState } from "react";
 import { DiVim } from "react-icons/di";
 import { CloseButton } from "./close-button";
-import { deleteProgrammed, programmedToStatement } from "@/lib/supabase-utils";
+import {
+  addTransaction,
+  deleteProgrammed,
+  programmedToStatement,
+} from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -38,6 +42,7 @@ export const MoreDetails = ({
   };
 
   const handleAccept = async () => {
+    await programmedToStatement(supabase, transaction);
     handleClose();
     handleOpenReschedule();
   };

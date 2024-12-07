@@ -84,6 +84,7 @@ export default async function Page() {
   const programmedValues = await getProgrammedValues(programmed);
   const programmedThisWeek = getProgrammedInThisWeek(programmed);
   const monthBalance = user?.balance + programmedValues;
+
   return (
     <div className="">
       <HomeHeader monthBalance={monthBalance} user={user} />

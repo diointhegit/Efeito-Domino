@@ -16,7 +16,7 @@ import { createClient } from "@/utils/supabase/client";
 import { cn } from "@/lib/utils";
 import { toBRCurrency } from "@/lib/currency";
 import { useRouter } from "next/navigation";
-
+import { motion } from "motion/react";
 export const SaveToGoals = ({
   goal,
   balance,
@@ -72,7 +72,11 @@ export const SaveToGoals = ({
       </p>
       {isOpenSave && (
         <div className="inset-0 absolute flex items-center justify-center bg-black/50">
-          <div className="bg-light-bg px-10 w-[320px] md:w-[27rem] py-5 rounded-md text-dark-text">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-light-bg px-10 w-[320px] md:w-[27rem] py-5 rounded-md text-dark-text"
+          >
             <div className="float-right">
               <CloseButton close={handleCloseSave} />
             </div>
@@ -113,7 +117,7 @@ export const SaveToGoals = ({
                 {...register("goal_value")}
               />
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
       {isOpenConfirmSave && (

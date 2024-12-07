@@ -4,6 +4,7 @@ import { dateToBRStringDate } from "@/lib/timefns";
 import { transactionType } from "@/lib/types";
 import { useState } from "react";
 import { BiPlus } from "react-icons/bi";
+import { motion } from "motion/react";
 
 export const Extrato = ({
   statement,
@@ -41,8 +42,10 @@ export const ExtratoCard = ({
   openAddTransaction: () => void;
 }) => {
   return (
-    <div
+    <motion.div
       id="hide_scrollbar"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
       className="md:w-[50rem] w-[20rem] my-4 h-[40rem] border border-primary bg-primary space-y-5 px-5 py-5 rounded-lg overflow-y-scroll"
     >
       <div className="flex justify-end">
@@ -63,12 +66,12 @@ export const ExtratoCard = ({
                 {String(Number(transaction.value).toFixed(2)).replace(".", ",")}
               </p>
               <p className="">{dateToBRStringDate(transaction.created_at)}</p>
-              <button className="rounded-lg border-2 border-secondary w-full col-span-2 md:col-auto my-2 md:my-0 hover:bg-secondary hover:text-light-text transition-all duration-150">
+              {/* <button className="rounded-lg border-2 border-secondary w-full col-span-2 md:col-auto my-2 md:my-0 hover:bg-secondary hover:text-light-text transition-all duration-150">
                 Ver detalhes
-              </button>
+              </button> */}
             </div>
           );
         })}
-    </div>
+    </motion.div>
   );
 };

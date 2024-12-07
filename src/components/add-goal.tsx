@@ -10,7 +10,7 @@ import { createGoal, getUid } from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import { CloseButton } from "./close-button";
-
+import { motion } from "motion/react";
 export const AddGoal = () => {
   const [isOpenCreate, setOpenCreate] = useState(false);
   const handleOpenCreate = () => {
@@ -51,7 +51,11 @@ export const AddGoal = () => {
       </div>
       {isOpenCreate && (
         <div className="inset-0 flex items-center justify-center absolute bg-black/75 transition-all duration-100 ">
-          <div className="w-[320px] md:w-[25rem] px-10 bg-light-bg  rounded-md  py-5">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-[320px] md:w-[25rem] px-10 bg-light-bg  rounded-md  py-5"
+          >
             <CloseButton close={handleCloseCreate} className="float-right" />
             <form className="grid" onSubmit={handleSubmit(onSubmit)}>
               <label htmlFor="name">Qual a sua meta?</label>
@@ -108,7 +112,7 @@ export const AddGoal = () => {
                 Criar meta
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>

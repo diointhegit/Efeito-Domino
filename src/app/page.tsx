@@ -1,9 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
 export default function Home() {
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
-  console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
   return (
     <main className="">
       <div className=" flex  items-center  justify-around w-screen px-20 pt-12 lg:pl-12 ">
@@ -25,7 +22,7 @@ export default function Home() {
             O que você precisa pra se tornar responsável financeiramente
           </p>
           <Link href="app/login">
-            <button className="text-2xl mt-4 rounded  text-light-text bg-primary px-5 py-3 hover:text-black hover:bg-white hover:outline-primary hover:outline hover:outline-2 transition-colors ease-in-out ">
+            <button className="text-2xl mt-4 rounded  text-light-text bg-primary px-5 py-3 hover:text-black hover:bg-white hover:outline-primary hover:outline hover:outline-2 transition-colors ease-in-out duration-150">
               Comece agora
             </button>
           </Link>

@@ -1,5 +1,6 @@
 "use client";
 
+import { InputErrorMessage } from "@/components/texts/error-text";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,7 +62,7 @@ export const LoginForm = () => {
             hasError ? "outline-red-500" : ""
           )}
         />
-        {errors.email && <p> {`${errors.email?.message}`}</p>}
+        {errors.email && <InputErrorMessage message={errors.email.message} />}
       </div>
       <div className="grid ">
         <label htmlFor="" className="text-xl">
@@ -78,13 +79,16 @@ export const LoginForm = () => {
             hasError ? "outline-red-500" : ""
           )}
         />
-        {errors.password && <p> {`${errors.password.message}`}</p>}
+        {errors.password && (
+          <InputErrorMessage message={errors.password.message} />
+        )}
       </div>
       <button
         type="submit"
+        disabled={isSubmitting}
         className="border-light-bg border-2 hover:bg-light-bg hover:outline text-light-text grid place-items-center hover:text-dark-text outline-1 px-5 text-center h-12 transition-all ease-in-out"
       >
-        Entrar
+        {isSubmitting ? "Entrando..." : "Entrar"}
       </button>
       <p className="">
         <Link
