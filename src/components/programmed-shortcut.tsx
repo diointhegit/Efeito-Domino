@@ -11,7 +11,7 @@ export const ProgrammedShortcut = ({
   uid: string | undefined;
 }) => {
   return (
-    <div className="px-5 bg-light-bg rounded-md  py-5 grid grid-cols-4 ">
+    <div className="px-5 bg-light-bg rounded-md  py-5 grid md:grid-cols-4 grid-cols-2">
       <p>{transaction.name}</p>
       <p>
         {transaction.type == "income" ? "+ " : "- "}
