@@ -9,7 +9,9 @@ import { motion } from "motion/react";
 export const ProgrammedStatement = ({
   programmed,
   uid,
+  categories,
 }: {
+  categories: { name: string; id: number; value: number }[];
   programmed: any;
   uid: string | undefined;
 }) => {
@@ -24,7 +26,7 @@ export const ProgrammedStatement = ({
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="md:w-[50rem]   my-4 h-[40rem] border border-primary bg-primary px-5 py-5 rounded-lg "
+      className="md:w-[50rem] w-[20rem] my-4 h-[40rem] border border-primary bg-primary space-y-5 px-5 py-5 rounded-lg"
     >
       <div className="flex justify-end my-6">
         <div
@@ -50,7 +52,13 @@ export const ProgrammedStatement = ({
           );
         })}
       </div>
-      {isOpen && <AddProgrammedTransaction close={handleClose} uid={uid} />}
+      {isOpen && (
+        <AddProgrammedTransaction
+          close={handleClose}
+          uid={uid}
+          categories={categories}
+        />
+      )}
     </motion.div>
   );
 };

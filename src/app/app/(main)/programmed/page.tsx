@@ -1,5 +1,5 @@
 import { MoreDetails } from "@/components/more-details";
-import { getProgrammed, getUid } from "@/lib/supabase-utils";
+import { getCategories, getProgrammed, getUid } from "@/lib/supabase-utils";
 import { dateToBRStringDate, ISOToBRStringDate } from "@/lib/timefns";
 import { createClient } from "@/utils/supabase/server";
 import { ProgrammedStatement } from "./programmed";
@@ -7,6 +7,7 @@ import { ProgrammedStatement } from "./programmed";
 export default async function Page() {
   const supabase = createClient();
   const uid = await getUid(supabase);
+  const categories = await getCategories(supabase, uid);
 
   const programmed = await getProgrammed(supabase, uid);
 
@@ -19,7 +20,11 @@ export default async function Page() {
           <b>sabe</b> que vai acontecer, ou que planeja que ocorra{" "}
         </p>
       </div>
-      <ProgrammedStatement programmed={programmed} uid={uid} />
+      <ProgrammedStatement
+        programmed={programmed}
+        uid={uid}
+        categories={categories}
+      />
     </div>
   );
 }

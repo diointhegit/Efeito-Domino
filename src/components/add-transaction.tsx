@@ -43,7 +43,6 @@ export function AddTransaction({
     }
     if (data.category) {
       const category = data.category.split(" ");
-      console.log(category);
 
       (data.categoryId = Number(category[0])),
         (data.categoryName = category[1]);
@@ -68,12 +67,12 @@ export function AddTransaction({
   return (
     <div
       id="addTransaction"
-      className="inset-0 flex items-center justify-center absolute bg-black/75 transition-all duration-100 "
+      className="inset-0 flex items-center justify-center absolute bg-black/75 transition-all duration-100 overflow-hidden"
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-[40rem] rounded-xl px-10 py-5 bg-white h-[30rem] "
+        className="w-[40rem] rounded-xl px-10 py-5 bg-white sm:h-[30rem] "
       >
         <div className="flex items-center justify-between px-14 py-3">
           <p className="text-2xl">Adicionar uma transação</p>

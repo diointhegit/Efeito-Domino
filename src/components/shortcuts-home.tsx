@@ -37,7 +37,9 @@ export const ShortcutAddTransaction = ({
 
 export const ShortcutAddProgrammedTransaction = ({
   uid,
+  categories,
 }: {
+  categories: { name: string; id: number; value: number }[];
   uid: string | undefined;
 }) => {
   const [isOpen, setOpen] = useState(false);
@@ -58,7 +60,13 @@ export const ShortcutAddProgrammedTransaction = ({
       >
         Programar transação
       </button>
-      {isOpen && <AddProgrammedTransaction close={handleClose} uid={uid} />}
+      {isOpen && (
+        <AddProgrammedTransaction
+          close={handleClose}
+          uid={uid}
+          categories={categories}
+        />
+      )}
     </div>
   );
 };

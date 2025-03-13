@@ -17,7 +17,6 @@ import {
 } from "date-fns";
 import { TZDate } from "@date-fns/tz";
 import { getNewControlDate } from "./utils";
-import { getDate } from "date-fns/fp";
 
 export const getBalance = async (
   supabase: SupabaseClient,
@@ -151,17 +150,15 @@ export const addToControl = async (
 ) => {
   let category = await getControl(supabase, categoryId);
   const newValue = category.spentValue + value;
-  console.log(category.spentValue, value, newValue);
   category.spentValue = newValue;
 
-  console.log(category);
   const { error } = await supabase
     .from("controls")
     .update(category)
     .eq("id", categoryId);
 
   if (error) return error;
-  return "irra";
+  return 200;
 };
 
 export const getControl = async (supabase: SupabaseClient, id: number) => {
@@ -197,7 +194,7 @@ export const programmedToStatement = async (
   if (transaction.id) {
     let user = await getUser(transaction.user_id, supabase);
     await addTransaction(supabase, transaction.user_id, transaction);
-    console.log(user, transaction.value, transaction.type, transaction.user_id);
+
     await updateBalance(
       supabase,
       user.balance,

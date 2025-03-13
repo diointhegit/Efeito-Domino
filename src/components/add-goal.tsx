@@ -40,7 +40,7 @@ export const AddGoal = () => {
   };
 
   return (
-    <div>
+    <div className="">
       <div
         className="bg-primary px-5 text-light-text rounded-md py-2 hover:bg-light-bg hover:outline-1 hover:outline-primary hover:text-primary hover:outline transition-all w-fit my-5"
         onClick={handleOpenCreate}

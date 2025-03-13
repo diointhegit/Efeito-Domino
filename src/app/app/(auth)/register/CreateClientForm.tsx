@@ -92,7 +92,6 @@ export const CreateUserForm = () => {
 
   const handleCreateUser = async (fd: any) => {
     const supabase = createClient();
-    console.log(fd);
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: fd.email,
       password: fd.password,

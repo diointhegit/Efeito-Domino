@@ -84,7 +84,7 @@ export const ControlDetails = ({
               <div className="w-full md:w-auto">
                 <div className="grid grid-cols-5 items-center">
                   <p className="col-span-3 text-lg ">{control.name}</p>
-                  <p className="col-span-2 font-bold text-lg ">
+                  <p className="col-span-2 font-bold text-md sm:text-lg ">
                     R$ {String(control.spentValue.toFixed(2).replace(".", ","))}
                   </p>
                 </div>
@@ -100,8 +100,7 @@ export const ControlDetails = ({
                       )}
                     ></div>
                   </div>
-                  <p className="text-xl ">
-                    R${" "}
+                  <p className="sm:text-xl text-xs ">
                     {String(control.controlValue.toFixed(2).replace(".", ","))}
                   </p>
                 </div>

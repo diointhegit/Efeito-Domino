@@ -17,9 +17,7 @@ export default async function Page() {
         Uma meta é o principal motivador! Lembre-se pelo quê você está tentando
         melhorar{" "}
       </p>
-      <div className="flex">
-        <AddGoal />
-      </div>
+      <AddGoal />
       <Goals />
     </div>
   );

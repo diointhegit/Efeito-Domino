@@ -79,7 +79,6 @@ export default async function Page() {
     return [];
   };
   const categories = await getCategories(supabase, uid);
-  console.log(categories);
   const programmed = (await getProgrammed(supabase, uid)) as any[];
   const programmedValues = await getProgrammedValues(programmed);
   const programmedThisWeek = getProgrammedInThisWeek(programmed);
@@ -93,7 +92,7 @@ export default async function Page() {
         <p className="text-2xl">Atalhos:</p>
         <div className="flex gap-5">
           <ShortcutAddTransaction categories={categories} uid={uid} />
-          <ShortcutAddProgrammedTransaction uid={uid} />
+          <ShortcutAddProgrammedTransaction uid={uid} categories={categories} />
         </div>
       </div>
 

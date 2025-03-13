@@ -51,7 +51,7 @@ export const ControlCard = ({
 
   return (
     <div>
-      <div className=" h-40 w-[320px]  bg-primary grid  px-5 py-2 rounded-xl text-light-text">
+      <div className=" h-40 sm:w-[320px] w-[250px]  bg-primary grid  px-5 py-2 rounded-xl text-light-text">
         <div className="flex justify-between">
           <p className="text-xl"> {control.name} </p>
           <ControlDetails control={control} uid={uid} />

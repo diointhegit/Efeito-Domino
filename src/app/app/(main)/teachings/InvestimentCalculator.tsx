@@ -72,8 +72,6 @@ const InvestmentCalculator = () => {
       netEarnings = grossEarnings - (grossEarnings * irTaxRate) / 100;
     }
 
-    console.log(poupanca);
-
     return {
       totalInvestment,
       grossEarnings,

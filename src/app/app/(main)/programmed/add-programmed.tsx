@@ -8,19 +8,23 @@ import {
   addProgrammedTransaction,
   getUid,
   getUser,
+  quickControlType,
 } from "@/lib/supabase-utils";
 import { createClient } from "@/utils/supabase/client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addYears } from "date-fns";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 export const AddProgrammedTransaction = ({
-  close,
   uid,
+  close,
+  categories,
 }: {
-  close: () => void;
   uid: string | undefined;
+  close: () => void;
+  categories: { name: string; id: number; value: number }[];
 }) => {
   const {
     register,
@@ -34,6 +38,17 @@ export const AddProgrammedTransaction = ({
   const supabase = createClient();
   const todayDate = new Date().toISOString();
   const inThreeYears = addYears(new Date(), 2).toISOString();
+  const [isDebt, setIsDebt] = useState(false);
+
+  const checkDebt = (e: any) => {
+    if (e.target.value == "debt") {
+      setIsDebt(true);
+    } else {
+      setIsDebt(false);
+    }
+  };
+
+  console.log(categories);
 
   // submitting the form
   const onSubmit: SubmitHandler<programmedTransactionType> = async (data) => {
@@ -88,13 +103,23 @@ export const AddProgrammedTransaction = ({
             id=""
             className=" p-1.5 border-2 rounded-md border-black"
           >
-            <option className=" p-1.5 rounded-md"> Indefinido </option>
+            {isDebt && categories
+              ? categories.map((category: quickControlType) => {
+                  return (
+                    <option value={`${category.id} ${category.name}`}>
+                      {category.name}
+                    </option>
+                  );
+                })
+              : ""}
+            <option value="Undefined">Indefinido</option>
           </select>
           {errors.category && <p>{errors.category.message}</p>}
 
           <label htmlFor="type">Tipo</label>
           <select
             {...register("type")}
+            onBlur={(e) => checkDebt(e)}
             className="border-2  p-1.5 border-black rounded-md"
             name="type"
           >
